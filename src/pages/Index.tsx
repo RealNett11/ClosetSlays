@@ -1,4 +1,3 @@
-
 import { ShirtCard } from "@/components/ShirtCard";
 import { Link } from "react-router-dom";
 
@@ -60,15 +59,15 @@ const Index = () => {
     }
   ];
 
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-red-200 via-pink-200 via-purple-200 via-blue-200 via-indigo-200 to-violet-200">
-      <div className="container mx-auto px-4 py-8">
-        {/* Main Banner with Title */}
-        <div className="bg-white/85 backdrop-blur-md rounded-3xl p-8 mb-12 shadow-xl border border-white/30">
-          <div className="text-center">
-            <h1 className="text-5xl md:text-6xl font-bold text-gray-800 mb-3 tracking-tight">
-              <span className="bg-gradient-to-r from-red-600 via-purple-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent">
-                closetslays
+return (
+  <div className="min-h-screen bg-gradient-to-br from-red-200 via-pink-200 via-purple-200 via-blue-200 via-indigo-200 to-violet-200">
+    <div className="container mx-auto px-4 py-8">
+      {/* Main Banner with Title */}
+      <div className="bg-white/85 backdrop-blur-md rounded-3xl p-8 mb-12 border border-white/30">
+        <div className="text-center">
+          <h1 className="text-5xl md:text-8xl font-bold mb-8 tracking-tight">
+            <span className="text-9xl font-bold animate-rainbow ">
+              Closeted Slays
               </span>
             </h1>
             <div className="h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent my-4 max-w-md mx-auto"></div>
@@ -88,7 +87,7 @@ const Index = () => {
         <div className="text-center">
           <Link 
             to="/about" 
-            className="inline-block bg-gradient-to-r from-red-600 via-purple-600 via-blue-600 to-indigo-600 hover:from-red-700 hover:via-purple-700 hover:via-blue-700 hover:to-indigo-700 text-white font-semibold py-4 px-8 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+            className="inline-block bg-animate-rainbow text-white font-semibold py-4 px-8 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
           >
             About Us
           </Link>
