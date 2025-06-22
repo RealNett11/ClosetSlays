@@ -63,21 +63,25 @@ return (
   <div className="min-h-screen bg-gradient-to-br from-red-200 via-pink-200 via-purple-200 via-blue-200 via-indigo-200 to-violet-200">
     <div className="container mx-auto px-4 py-8">
       {/* Main Banner with Title */}
-      <div className="bg-white/85 backdrop-blur-md rounded-3xl p-8 mb-12 border border-white/30">
-        <div className="text-center">
-          <h1 className="text-5xl md:text-8xl font-bold mb-8 tracking-tight">
-            <span className="text-9xl font-bold animate-rainbow ">
+      <div className="bg-transparent backdrop-blur backdrop-contrast-125 backdrop-saturate-175 rounded-3xl p-4 mb-4 border-2 border-white/20">
+        <div className="text-center space-y-4">
+          <h1 className="text-5xl md:text-8xl font-bold mb-2 tracking-tight">
+            <span className="text-9xl animate-rainbow ">
               Closeted Slays
-              </span>
-            </h1>
-            <div className="h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent my-4 max-w-md mx-auto"></div>
-            <p className="text-xl text-gray-600 font-medium">Pride Shirts</p>
-            <p className="text-sm text-gray-500 mt-1">Express yourself with our exclusive designs</p>
+            </span>
+          </h1>
+
+          <div className="h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent my-1 max-w-md mx-auto"></div>
+            
+          <p className="text-6xl rainbow-pop ">Pride Shirts</p>
+
+          {/* This will now appear on its own line with proper spacing */}
+          <p className="text-2xl text-gray-500 glitter-effect">Express yourself with our exclusive designs</p>
           </div>
         </div>
 
         {/* Shirt Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto mb-12 ">
           {shirts.map((shirt) => (
             <ShirtCard key={shirt.id} shirt={shirt} />
           ))}
