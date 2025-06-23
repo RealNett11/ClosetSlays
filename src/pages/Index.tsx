@@ -59,22 +59,30 @@ const Index = () => {
     }
   ];
 
-return (
-  <div className="min-h-screen bg-gradient-to-br from-red-200 via-pink-200 via-purple-200 via-blue-200 via-indigo-200 to-violet-200">
-    <div className="container mx-auto px-4 py-8">
-      {/* Main Banner with Title */}
-      <div className="bg-transparent backdrop-blur backdrop-contrast-125 backdrop-saturate-175 rounded-3xl p-4 mb-4 border-2 border-white/20">
-        <div className="text-center space-y-4">
-          <h1 className="text-5xl md:text-8xl font-bold mb-2 tracking-tight">
-            <span className="text-9xl animate-rainbow ">
-              Closeted Slays
-            </span>
-          </h1>
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-red-200 via-pink-200 via-purple-200 via-blue-200 via-indigo-200 to-violet-200">
+      <div className="container mx-auto px-4 py-8">
+        {/* Main Banner with Title */}
+        <div className="bg-transparent backdrop-blur backdrop-contrast-125 backdrop-saturate-175 rounded-3xl p-4 mb-4 border-2 border-white/20">
+          <div className="text-center space-y-4">
+            <h1 className="text-5xl md:text-8xl font-bold mb-2 tracking-tight">
+              <span className="text-9xl animate-rainbow ">
+                Closeted Slays
+              </span>
+            </h1>
 
-          <p className="text-6xl tracking-wider font-bold text-gray-700 textborder">Pride Shirts</p>
+            <p className="text-6xl tracking-wider font-bold text-gray-700 textborder">Pride Shirts</p>
 
-          {/* This will now appear on its own line with proper spacing */}
-          <p className="text-2xl text-gray-500  ">Express yourself with our exclusive designs</p>
+            {/* Added flex container around existing text and new button */}
+            <div className="flex items-center justify-center gap-4">
+              <p className="text-2xl text-gray-500">Express yourself with our exclusive designs</p>
+              <Link 
+                to="/about" 
+                className="text-white bg-black font-medium py-2 px-4 rounded-full transition-all duration-200 hover:scale-105 shadow hover:shadow-md text-sm"
+              >
+                About Us
+              </Link>
+            </div>
           </div>
         </div>
 
