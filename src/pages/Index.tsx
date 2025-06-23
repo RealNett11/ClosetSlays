@@ -49,7 +49,7 @@ const Index = () => {
       id: 8,
       name: "GAY™",
       price: "$24.99",
-      image: "/placeholder.svg"
+      image: "/images/gay-tm.png"
     },
     {
       id: 9,
