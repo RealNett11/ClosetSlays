@@ -71,7 +71,7 @@ return (
             </span>
           </h1>
 
-          <p className="text-6xl tracking-wider font-bold text-gray-700 border">Pride Shirts</p>
+          <p className="text-6xl tracking-wider font-bold text-gray-700 textborder">Pride Shirts</p>
 
           {/* This will now appear on its own line with proper spacing */}
           <p className="text-2xl text-gray-500  ">Express yourself with our exclusive designs</p>
