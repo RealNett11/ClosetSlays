@@ -71,12 +71,10 @@ return (
             </span>
           </h1>
 
-          <div className="h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent my-1 max-w-md mx-auto"></div>
-            
-          <p className="text-6xl rainbow-pop ">Pride Shirts</p>
+          <p className="text-6xl tracking-wider font-bold text-gray-700 border">Pride Shirts</p>
 
           {/* This will now appear on its own line with proper spacing */}
-          <p className="text-2xl text-gray-500 glitter-effect">Express yourself with our exclusive designs</p>
+          <p className="text-2xl text-gray-500  ">Express yourself with our exclusive designs</p>
           </div>
         </div>
 
@@ -91,7 +89,7 @@ return (
         <div className="text-center">
           <Link 
             to="/about" 
-            className="inline-block bg-animate-rainbow text-white font-semibold py-4 px-8 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+            className="inline-block text-white bg-black font-semibold py-4 px-8 rounded-full transition-all duration-2  q00 transform hover:scale-105 shadow-lg hover:shadow-xl"
           >
             About Us
           </Link>

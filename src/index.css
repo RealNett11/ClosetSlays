@@ -226,4 +226,9 @@
     transform: scale(0.97);
   }
 }  
+  .border {
+  font-size: 6rem;
+  -webkit-text-stroke: 1px white;
+  -webkit-text-stroke-color: rgb(255, 255, 255);
+}
 }
