@@ -16,10 +16,10 @@ export const ShirtCard = ({ shirt }: ShirtCardProps) => {
   return (
     <Card className="group hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 bg-white/90 backdrop-blur-sm border-0 shadow-lg overflow-hidden">
       <CardContent className="p-6">
-        <div className="aspect-square bg-gray-50 rounded-xl mb-6 flex items-center justify-center overflow-hidden border border-gray-100">
+        <div className="aspect-square bg-gray-50 rounded-xl mb-6 flex items-center justify-center overflow-hidden">
           <div className="text-center p-4">
             <div className="text-4xl mb-3">👕</div>
-            <div className="text-sm font-medium text-gray-600 leading-tight">
+            <div className="text-lg font-bold text-gray-900 leading-tight">
               {shirt.name}
             </div>
           </div>
