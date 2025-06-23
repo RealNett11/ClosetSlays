@@ -26,7 +26,7 @@ const About = () => {
                   About closetslays
                 </span>
               </h1>
-              <p className="text-xl text-gray-600">Our Story & Mission</p>
+              <p className="text-xl text-gray-600">closetslays@proton.me</p>
             </div>
 
             <div className="space-y-6 text-gray-700 leading-relaxed">
@@ -48,6 +48,13 @@ const About = () => {
                 <h2 className="text-2xl font-semibold text-gray-800 mb-4">🏳️‍🌈 Our Vision</h2>
                 <p className="text-lg">
                   closetslays exists to help people express their truth through fashion. We create shirts that make statements, spark conversations, and celebrate the beautiful diversity of our community. Every design is crafted with love, humor, and pride.
+                </p>
+              </div>
+                
+              <div className="bg-gray-50/80 rounded-2xl p-6 border border-gray-100">
+                <h2 className="text-2xl font-semibold text-gray-800 mb-4">🛍️ Refund Policy</h2>
+                <p className="text-lg">
+                  We offer refunds within 30 days with proof of purchase. Contact us at <span className="font-bold">closetslays@proton.me</span> with any questions.
                 </p>
               </div>
             </div>
