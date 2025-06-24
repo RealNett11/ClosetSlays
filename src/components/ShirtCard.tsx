@@ -14,33 +14,29 @@ interface ShirtCardProps {
 
 export const ShirtCard = ({ shirt }: ShirtCardProps) => {
   return (
-    <Card className="group hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 bg-white border-0 shadow-lg overflow-hidden h-full flex flex-col">
-      <CardContent className="p-4 sm:p-6 flex flex-col flex-grow">
-        {/* Transparent container with loading state */}
-        <div className="aspect-square bg-transparent rounded-xl mb-4 overflow-hidden relative">
+    <Card className="group transition-all duration-300 bg-white/20 backdrop-blur-md rounded-xl overflow-hidden border border-black/20 hover:border-black/30 shadow-sm hover:shadow-lg hover:bg-white/30">
+      <CardContent className="p-4">
+        {/* Image container - fully transparent */}
+        <div className="aspect-square rounded-lg mb-4 overflow-hidden bg-transparent">
           <img
             src={shirt.image}
-            alt={`${shirt.name} - Pride shirt`}
-            className="object-contain w-full h-full transition-transform duration-300 group-hover:scale-[1.03] mix-blend-multiply"
+            alt={`${shirt.name} shirt`}
+            className="object-contain w-full h-full transition-transform duration-300 group-hover:scale-[1.03]"
             loading="lazy"
-            decoding="async"
             onError={(e) => {
               const target = e.target as HTMLImageElement;
+              target.onerror = null;
               target.src = "/placeholder-shirt.svg";
-              target.parentElement?.classList.add('bg-gray-50');
             }}
           />
         </div>
         
-        {/* Content section */}
-        <div className="text-center space-y-3 mt-auto">
-          <h3 className="font-medium text-base sm:text-lg text-gray-800 line-clamp-2 leading-tight">
+        <div className="text-center space-y-3">
+          <h3 className="font-medium text-lg text-gray-800 group-hover:text-black leading-tight">
             {shirt.name}
           </h3>
-          <p className="text-xl sm:text-2xl font-bold text-gray-700 min-h-[2.5rem] flex items-center justify-center">
-            {shirt.price}
-          </p>
-          <AddToCartButton className="mt-2 w-full" />
+          <p className="text-xl font-bold text-gray-700">{shirt.price}</p>
+          <AddToCartButton />
         </div>
       </CardContent>
     </Card>
