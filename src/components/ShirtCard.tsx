@@ -1,5 +1,5 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { AddToCartButton } from "./AddToCartButton";  
+import { AddToCartButton } from "./AddToCartButton";
 
 interface Shirt {
   id: number;
@@ -14,19 +14,25 @@ interface ShirtCardProps {
 
 export const ShirtCard = ({ shirt }: ShirtCardProps) => {
   return (
-    <Card className="group hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 bg-white/90 backdrop-blur-sm border-0 shadow-lg overflow-hidden">
-      <CardContent className="p-6">
-        <div className="aspect-square bg-gray-100 rounded-xl mb-6 flex items-center justify-center overflow-hidden">
-          <div className="text-center p-4">
-            <div className="text-4xl mb-3">👕</div>
-            <div className="text-lg font-bold old text-gray-900 leading-tight">
-              {shirt.name}
-            </div>
-          </div>
+    <Card className="group transition-all duration-300 bg-white/20 backdrop-blur-md rounded-xl overflow-hidden border border-black/20 hover:border-black/30 shadow-sm hover:shadow-lg hover:bg-white/30">
+      <CardContent className="p-4">
+        {/* Image container - fully transparent */}
+        <div className="aspect-square rounded-lg mb-4 overflow-hidden bg-transparent">
+          <img
+            src={shirt.image}
+            alt={`${shirt.name} shirt`}
+            className="object-contain w-full h-full transition-transform duration-300 group-hover:scale-[1.03]"
+            loading="lazy"
+            onError={(e) => {
+              const target = e.target as HTMLImageElement;
+              target.onerror = null;
+              target.src = "/placeholder-shirt.svg";
+            }}
+          />
         </div>
         
-        <div className="text-center space-y-4">
-          <h3 className="font-semibold text-lg text-gray-800 group-hover:text-gray-900 transition-colors leading-tight">
+        <div className="text-center space-y-3">
+          <h3 className="font-medium text-lg text-gray-800 group-hover:text-black leading-tight">
             {shirt.name}
           </h3>
           <p className="text-2xl font-bold text-gray-700">{shirt.price}</p>
