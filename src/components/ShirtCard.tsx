@@ -31,7 +31,7 @@ export const ShirtCard = ({ shirt }: ShirtCardProps) => {
           </h3>
           <p className="text-2xl font-bold text-gray-700">{shirt.price}</p>
           
-          <AddToCartButton />
+          <AddToCartButton shirt={shirt} />
         </div>
       </CardContent>
     </Card>
