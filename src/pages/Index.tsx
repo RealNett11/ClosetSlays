@@ -10,55 +10,55 @@ const Index = () => {
     {
       id: 1,
       name: "GNC - Gay & Cranky",
-      price: "$24.99",
+      price: "$28",
       image: "/images/GNCS.png"
     },
     {
       id: 2,
       name: "This Shirt Is Gay",
-      price: "$22.99",
+      price: "$28",
       image: "/images/ThisShirtIsGayS.png"
     },
     {
       id: 3,
       name: "Supreme Shirt",
-      price: "$29.99",
+      price: "$28",
       image: "/images/supremeS.png"
     },
     {
       id: 4,
       name: "Slay Now Cry Later",
-      price: "$25.99",
+      price: "$28",
       image: "/images/SlayNowCryLaterS.png"
     },
     {
       id: 5,
       name: "Homo Depot",
-      price: "$26.99",
+      price: "$28",
       image: "/images/TheHomeDepotS.png"
     },
     {
       id: 6,
       name: "Emotionally Attached to My Air Fryer",
-      price: "$23.99",
+      price: "$28",
       image: "/images/AirFryerS.png"
     },
     {
       id: 7,
       name: "Dept of Gay Affairs",
-      price: "$27.99",
+      price: "$28",
       image: "/images/Dept-GayAffairsS.png"
     },
     {
       id: 8,
       name: "GAY™",
-      price: "$24.99",
+      price: "$28",
       image: "/images/gay-tm.png"
     },
     {
       id: 9,
       name: "Amazon Pride - Two Gay Delivery",
-      price: "$28.99",
+      price: "$28",
       image: "/images/AmazonPrideS.png"
     }
   ];
