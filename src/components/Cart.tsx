@@ -1,14 +1,12 @@
 import { useCart } from './CartContext';
 import { loadStripe } from '@stripe/stripe-js';
 
-// Define the props type outside the component
 interface CartProps {
   onClose: () => void;
 }
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY || '');
 
-// Use the defined props type for the component
 export const Cart: React.FC<CartProps> = ({ onClose }) => {
   const {
     cartItems,
@@ -38,6 +36,7 @@ export const Cart: React.FC<CartProps> = ({ onClose }) => {
             name: item.name,
             price: parseFloat(item.price.replace('$', '')),
             quantity: item.quantity,
+            size: item.size,
           })),
         }),
       });
@@ -93,10 +92,12 @@ export const Cart: React.FC<CartProps> = ({ onClose }) => {
           <>
             <div className="space-y-4 mb-6">
               {cartItems.map(item => (
-                <div key={item.id} className="flex items-center justify-between p-3 border-b">
+                <div key={`${item.id}-${item.size}`} className="flex items-center justify-between p-3 border-b">
                   <div className="flex-1">
                     <h3 className="font-medium">{item.name}</h3>
-                    <p className="text-gray-600">{item.price}</p>
+                    <p className="text-gray-600">
+                      {item.price} {item.size && <span className="ml-2">| Size: {item.size}</span>}
+                    </p>
                   </div>
                   <div className="flex items-center">
                     <button 
