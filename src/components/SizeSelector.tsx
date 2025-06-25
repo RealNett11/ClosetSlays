@@ -1,4 +1,3 @@
-// SizeSelector.tsx
 import { useState } from 'react';
 
 interface SizeSelectorProps {
@@ -25,8 +24,8 @@ export const SizeSelector: React.FC<SizeSelectorProps> = ({ shirt, onClose, onAd
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-white rounded-2xl p-6 max-w-sm w-full">
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+      <div className="bg-white rounded-2xl p-6 max-w-sm w-full mx-4">
         <div className="flex justify-between items-center mb-4">
           <h3 className="text-lg font-bold">Select Size for {shirt.name}</h3>
           <button onClick={onClose} className="text-gray-500 hover:text-black text-2xl">
