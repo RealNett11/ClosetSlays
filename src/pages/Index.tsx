@@ -107,7 +107,7 @@ const Index = () => {
           <div className="text-center">
             <Link 
               to="/about" 
-              className="inline-block text-white bg-black font-semibold py-4 px-8 rounded-full transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl"
+              className="inline-block add-to-cart-button text-white bg-black font-semibold py-4 px-8 rounded-full transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl"
             >
               About Us
             </Link>
