@@ -75,10 +75,10 @@ const Index = () => {
                   Closeted Slays
                 </span>
               </h1>
-              <p className="text-6xl tracking-wider font-bold text-gray-700 textborder">Pride Shirts</p>
+              <p className="text-6xl tracking-norma font-bold text-gray-900 textborder">Pride Shirts</p>
               
               <div className="flex items-center justify-center gap-4">
-                <p className="text-2xl text-gray-500">Express yourself with our exclusive designs</p>
+                <p className="text-2xl font-bold text-gray-600">Spread Love With Pride</p>
                 <Link 
                   to="/about" 
                   className="text-white bg-black font-medium py-2 px-4 rounded-full transition-all duration-200 hover:scale-105 shadow hover:shadow-md text-sm"
@@ -89,20 +89,16 @@ const Index = () => {
             </div>
           </div>
 
-          {/* New Prominent View Cart Button */}
-          <div className="mb-8 text-center">
-            <button 
-              onClick={() => setIsCartOpen(true)}
-              className="w-full max-w-2xl mx-auto py-4 px-8 text-2xl font-bold rounded-full transition-all duration-300 hover:scale-[1.02] shadow-lg hover:shadow-xl"
-              style={{
-                background: 'black',
-                color: 'white',
-                border: '2px solid black'
-              }}
-            >
-              🛒 View Your Cart
-            </button>
-          </div>
+          {/* New Prominent View Cart Button with Rainbow Glow */}
+<div className="mb-8 text-center">
+  <button 
+    onClick={() => setIsCartOpen(true)}
+    className="add-to-cart-button w-full max-w-2xl mx-auto py-4 px-8 text-2xl font-bold flex items-center justify-center gap-2"
+  >
+    <span className="cart-icon">🛒</span>
+    View Your Cart
+  </button>
+</div>
 
           {/* Shirt Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto mb-12">

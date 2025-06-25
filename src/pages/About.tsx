@@ -1,6 +1,6 @@
-
-import { Link } from "react-router-dom";
-import { ArrowLeft } from "lucide-react";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { ArrowLeft } from 'lucide-react';
 
 const About = () => {
   return (
@@ -23,38 +23,45 @@ const About = () => {
             <div className="text-center mb-8">
               <h1 className="text-4xl font-bold text-gray-800 mb-4">
                 <span className="bg-gradient-to-r from-red-600 via-purple-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent">
-                  About closetslays
+                  About Closet Slays
                 </span>
               </h1>
-              <p className="text-xl text-gray-600">closetslays@proton.me</p>
+
             </div>
 
             <div className="space-y-6 text-gray-700 leading-relaxed">
               <div className="bg-gray-50/80 rounded-2xl p-6 border border-gray-100">
-                <h2 className="text-2xl font-semibold text-gray-800 mb-4">💝 Supporting Education</h2>
+                <h2 className="text-2xl font-semibold text-gray-800 mb-4">🏳️‍🌈 Our Vision</h2>
                 <p className="text-lg">
-                  We're a small business founded by students working hard to save for college. Every purchase you make helps us pursue our educational dreams while creating amazing pride apparel that celebrates authenticity and self-expression.
+                  At Closet Slays, we believe in speaking out, being bold, and expressing your true self without compromise. Our apparel is designed to celebrate diversity, spark conversations, and empower you to wear your identity with pride. Every piece we create is crafted with love, humor, and the unwavering belief that fashion should be as unique as you are.
                 </p>
               </div>
 
               <div className="bg-gray-50/80 rounded-2xl p-6 border border-gray-100">
                 <h2 className="text-2xl font-semibold text-gray-800 mb-4">🤝 Giving Back</h2>
                 <p className="text-lg">
-                  We believe in supporting our community. That's why we donate 10% of every order to important causes that align with our values of equality, acceptance, and positive change.
+                  At Closet Slays, we put our values into action. We support organizations that share our commitment to equality and acceptance, because fashion should do more than look good it should do good. Every purchase helps us create positive change, proving that together, we're building more than a brand we're building a better world.
                 </p>
               </div>
 
               <div className="bg-gray-50/80 rounded-2xl p-6 border border-gray-100">
-                <h2 className="text-2xl font-semibold text-gray-800 mb-4">🏳️‍🌈 Our Vision</h2>
+                <h2 className="text-2xl font-semibold text-gray-800 mb-4">💝 Supporting Education</h2>
                 <p className="text-lg">
-                  closetslays exists to help people express their truth through fashion. We create shirts that make statements, spark conversations, and celebrate the beautiful diversity of our community. Every design is crafted with love, humor, and pride.
+                  We're a student-founded small business working hard to save for college. Your support doesn't just get you amazing pride apparel - it helps us pursue our educational dreams and build a future where we can continue making a difference through our work.
                 </p>
               </div>
                 
               <div className="bg-gray-50/80 rounded-2xl p-6 border border-gray-100">
                 <h2 className="text-2xl font-semibold text-gray-800 mb-4">🛍️ Refund Policy</h2>
                 <p className="text-lg">
-                  We offer refunds within 30 days with proof of purchase. Contact us at <span className="font-bold">closetslays@proton.me</span> with any questions.
+                  We offer refunds within 30 days with proof of purchase. Your satisfaction is important to us, and we're committed to making things right if you're not completely happy with your order.
+                </p>
+              </div>
+
+              <div className="bg-gray-50/80 rounded-2xl p-6 border border-gray-100">
+                <h2 className="text-2xl font-semibold text-gray-800 mb-4">📬 Contact Us</h2>
+                <p className="text-lg">
+                  Have questions or just want to say hello? Reach out to us at <span className="font-bold">closetslays@proton.me</span>. We'd love to hear from you about anything - from product inquiries to suggestions for new designs that celebrate our community.
                 </p>
               </div>
             </div>
