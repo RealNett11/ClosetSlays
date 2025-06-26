@@ -1,6 +1,7 @@
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import { SizeSelector } from './SizeSelector';
 import { useCart } from './CartContext';
+import confetti from 'canvas-confetti';
 
 interface AddToCartButtonProps {
   className?: string;
@@ -14,8 +15,37 @@ interface AddToCartButtonProps {
 
 export function AddToCartButton({ className, shirt }: AddToCartButtonProps) {
   const [showSizeSelector, setShowSizeSelector] = useState(false);
-  const cardRef = useRef<HTMLDivElement>(null);
+
   const { addToCart } = useCart();
+
+  const fireConfetti = () => {
+    // Create multiple bursts across the entire width
+    const end = Date.now() + 700; // 1 second duration
+    
+    const frame = () => {
+      // Launch from multiple positions across the entire width
+      for (let i = 0; i < 5; i++) {
+        const x = i / 4; // Distribute across 0 to 1 (left to right)
+        confetti({
+          particleCount: 9, // 200 particles per burst (5 bursts = 1000 total)
+          spread: 100,
+          origin: { x, y: 0 }, // Top at position x
+          colors: ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff'],
+          shapes: ['square'],
+          scalar: 1,
+          gravity: 3.5,
+          ticks: 300,
+          disableForReducedMotion: true
+        });
+      }
+
+      if (Date.now() < end) {
+        requestAnimationFrame(frame);
+      }
+    };
+
+    frame();
+  };
 
   const handleAddToCart = (size: string) => {
     addToCart({
@@ -23,11 +53,12 @@ export function AddToCartButton({ className, shirt }: AddToCartButtonProps) {
       size,
     });
     setShowSizeSelector(false);
+    fireConfetti();
   };
 
   return (
     <div className="mt-4">
-      <div ref={cardRef}>
+      <div>
         <button
           onClick={() => setShowSizeSelector(true)}
           className={`add-to-cart-button px-6 py-3 ${className || ''}`}
@@ -42,7 +73,7 @@ export function AddToCartButton({ className, shirt }: AddToCartButtonProps) {
           shirt={shirt}
           onClose={() => setShowSizeSelector(false)}
           onAddToCart={handleAddToCart}
-          cardRef={cardRef}
+          cardRef={null}
         />
       )}
     </div>

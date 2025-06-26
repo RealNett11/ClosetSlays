@@ -65,21 +65,20 @@ const Index = () => {
       id: 10,
       name: "I Came Out For This ",
       price: "$20",
-      image: "/images/ICameOutForThisS.png"
+      image: "/placeholder.svg"
     },
     {
       id: 11,
-      name: "Spread Love Like Glitter",
+      name: "Gaytorade",
       price: "$20",
-      image: "/images/SpreadLoveLikeGlitterS.png"
+      image: "/placeholder.svg"
     },
     {
       id: 12,
-      name: "Gaytorade",
+      name: "Spread Love Like Glitter",
       price: "$20",
-      image: "/images/GaytoradeS.png"
+      image: "/placeholder.svg"
     }
-    
   ];
 
   return (
