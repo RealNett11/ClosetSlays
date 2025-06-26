@@ -65,21 +65,21 @@ export const Cart: React.FC<CartProps> = ({ onClose }) => {
       onClick={onClose}
     >
       <div 
-        className="bg-white rounded-2xl p-6 w-full max-w-md max-h-[80vh] overflow-y-auto"
+        className="bg-white rounded-2xl p-6 w-full max-w-2xl max-h-[90vh] overflow-y-auto"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="flex justify-between items-center mb-4">
-          <h2 className="text-2xl font-bold">Your Cart ({totalItems})</h2>
-          <div className="flex gap-2">
+        <div className="flex justify-between items-center mb-6">
+          <h2 className="text-3xl font-bold">Your Cart ({totalItems})</h2>
+          <div className="flex gap-4">
             <button 
               onClick={clearCart}
-              className="text-red-500 hover:text-red-700 text-sm"
+              className="text-red-500 hover:text-red-700 text-sm font-medium"
             >
               Clear All
             </button>
             <button 
               onClick={onClose}
-              className="text-gray-500 hover:text-black text-2xl"
+              className="text-gray-500 hover:text-black text-3xl"
             >
               &times;
             </button>
@@ -87,14 +87,26 @@ export const Cart: React.FC<CartProps> = ({ onClose }) => {
         </div>
 
         {cartItems.length === 0 ? (
-          <p className="text-center py-8">Your cart is empty</p>
+          <p className="text-center py-8 text-lg">Your cart is empty</p>
         ) : (
           <>
-            <div className="space-y-4 mb-6">
+            <div className="space-y-6 mb-8">
               {cartItems.map(item => (
-                <div key={`${item.id}-${item.size}`} className="flex items-center justify-between p-3 border-b">
+                <div key={`${item.id}-${item.size}`} className="flex items-center gap-4 p-4 bg-gray-50 rounded-lg">
+                  <div className="w-20 h-20 flex-shrink-0">
+                    <img
+                      src={item.image}
+                      alt={item.name}
+                      className="w-full h-full object-contain rounded"
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.onerror = null;
+                        target.src = "/placeholder-shirt.svg";
+                      }}
+                    />
+                  </div>
                   <div className="flex-1">
-                    <h3 className="font-medium">{item.name}</h3>
+                    <h3 className="font-medium text-lg">{item.name}</h3>
                     <p className="text-gray-600">
                       {item.price} {item.size && <span className="ml-2">| Size: {item.size}</span>}
                     </p>
@@ -102,21 +114,21 @@ export const Cart: React.FC<CartProps> = ({ onClose }) => {
                   <div className="flex items-center">
                     <button 
                       onClick={() => updateQuantity(item.id, Math.max(1, item.quantity - 1))}
-                      className="px-2 py-1 bg-gray-200 rounded-l"
+                      className="px-3 py-1 bg-gray-200 rounded-l hover:bg-gray-300"
                       disabled={item.quantity <= 1}
                     >
                       -
                     </button>
-                    <span className="px-3 py-1 bg-gray-100">{item.quantity}</span>
+                    <span className="px-4 py-1 bg-gray-100">{item.quantity}</span>
                     <button 
                       onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                      className="px-2 py-1 bg-gray-200 rounded-r"
+                      className="px-3 py-1 bg-gray-200 rounded-r hover:bg-gray-300"
                     >
                       +
                     </button>
                     <button 
                       onClick={() => removeFromCart(item.id)}
-                      className="ml-4 text-red-500"
+                      className="ml-4 text-red-500 hover:text-red-700 font-medium"
                     >
                       Remove
                     </button>
@@ -125,14 +137,14 @@ export const Cart: React.FC<CartProps> = ({ onClose }) => {
               ))}
             </div>
 
-            <div className="border-t pt-4">
-              <div className="flex justify-between font-bold text-lg mb-4">
+            <div className="pt-6">
+              <div className="flex justify-between font-bold text-xl mb-6">
                 <span>Total:</span>
                 <span>${totalPrice.toFixed(2)}</span>
               </div>
               <button
                 onClick={handleCheckout}
-                className="w-full py-3 px-6 bg-black text-white font-semibold rounded-full hover:bg-gray-800 transition-colors"
+                className="w-full py-4 px-6 bg-black text-white font-semibold rounded-full hover:bg-gray-800 transition-colors text-lg"
                 disabled={cartItems.length === 0}
               >
                 Proceed to Checkout
