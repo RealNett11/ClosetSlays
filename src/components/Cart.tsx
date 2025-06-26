@@ -25,7 +25,8 @@ export const Cart: React.FC<CartProps> = ({ onClose }) => {
         throw new Error('Stripe failed to initialize');
       }
 
-      const response = await fetch('/api/create-checkout-session', {
+      // Always use localhost:3001 for development
+      const response = await fetch('http://localhost:3001/api/create-checkout-session', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -42,7 +43,14 @@ export const Cart: React.FC<CartProps> = ({ onClose }) => {
       });
 
       if (!response.ok) {
-        throw new Error('Network response was not ok');
+        const errorText = await response.text();
+        console.error('Checkout API error:', {
+          status: response.status,
+          statusText: response.statusText,
+          errorText
+        });
+        alert('Checkout failed. Please try again later.');
+        throw new Error(`Network response was not ok: ${response.status} ${response.statusText}`);
       }
 
       const session = await response.json();
@@ -53,6 +61,7 @@ export const Cart: React.FC<CartProps> = ({ onClose }) => {
 
       if (result.error) {
         console.error(result.error);
+        alert('Checkout failed: ' + result.error.message);
       }
     } catch (error) {
       console.error('Checkout error:', error);
