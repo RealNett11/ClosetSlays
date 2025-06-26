@@ -1,15 +1,13 @@
 import { useCart } from './CartContext';
 import { loadStripe } from '@stripe/stripe-js';
 
-// Define props type
-type CartProps = {
+interface CartProps {
   onClose: () => void;
-};
+}
 
-// Use environment variable for Stripe public key
-const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY || '');
 
-export const Cart = ({ onClose }: CartProps) => {
+export const Cart: React.FC<CartProps> = ({ onClose }) => {
   const {
     cartItems,
     removeFromCart,
@@ -20,42 +18,55 @@ export const Cart = ({ onClose }: CartProps) => {
   } = useCart();
 
   const handleCheckout = async () => {
-    const stripe = await stripePromise;
-    
-    const response = await fetch('/api/create-checkout-session', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        items: cartItems.map(item => ({
-          id: item.id,
-          name: item.name,
-          price: parseFloat(item.price.replace('$', '')),
-          quantity: item.quantity,
-        })),
-      }),
-    });
+    try {
+      const stripe = await stripePromise;
+      
+      if (!stripe) {
+        throw new Error('Stripe failed to initialize');
+      }
 
-    const session = await response.json();
-    
-    const result = await stripe?.redirectToCheckout({
-      sessionId: session.id,
-    });
+      const response = await fetch('/api/create-checkout-session', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          items: cartItems.map(item => ({
+            id: item.id,
+            name: item.name,
+            price: parseFloat(item.price.replace('$', '')),
+            quantity: item.quantity,
+            size: item.size,
+          })),
+        }),
+      });
 
-    if (result?.error) {
-      console.error(result.error);
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      const session = await response.json();
+      
+      const result = await stripe.redirectToCheckout({
+        sessionId: session.id,
+      });
+
+      if (result.error) {
+        console.error(result.error);
+      }
+    } catch (error) {
+      console.error('Checkout error:', error);
     }
   };
 
   return (
     <div 
       className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
-      onClick={onClose} // Close when clicking on overlay
+      onClick={onClose}
     >
       <div 
         className="bg-white rounded-2xl p-6 w-full max-w-md max-h-[80vh] overflow-y-auto"
-        onClick={(e) => e.stopPropagation()} // Prevent click from bubbling to overlay
+        onClick={(e) => e.stopPropagation()}
       >
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-2xl font-bold">Your Cart ({totalItems})</h2>
@@ -81,10 +92,12 @@ export const Cart = ({ onClose }: CartProps) => {
           <>
             <div className="space-y-4 mb-6">
               {cartItems.map(item => (
-                <div key={item.id} className="flex items-center justify-between p-3 border-b">
+                <div key={`${item.id}-${item.size}`} className="flex items-center justify-between p-3 border-b">
                   <div className="flex-1">
                     <h3 className="font-medium">{item.name}</h3>
-                    <p className="text-gray-600">{item.price}</p>
+                    <p className="text-gray-600">
+                      {item.price} {item.size && <span className="ml-2">| Size: {item.size}</span>}
+                    </p>
                   </div>
                   <div className="flex items-center">
                     <button 

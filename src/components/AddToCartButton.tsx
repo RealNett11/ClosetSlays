@@ -1,3 +1,5 @@
+import { useState, useRef } from 'react';
+import { SizeSelector } from './SizeSelector';
 import { useCart } from './CartContext';
 
 interface AddToCartButtonProps {
@@ -10,16 +12,39 @@ interface AddToCartButtonProps {
   };
 }
 
-export const AddToCartButton: React.FC<AddToCartButtonProps> = ({ className, shirt }) => {
+export function AddToCartButton({ className, shirt }: AddToCartButtonProps) {
+  const [showSizeSelector, setShowSizeSelector] = useState(false);
+  const cardRef = useRef<HTMLDivElement>(null);
   const { addToCart } = useCart();
 
+  const handleAddToCart = (size: string) => {
+    addToCart({
+      ...shirt,
+      size,
+    });
+    setShowSizeSelector(false);
+  };
+
   return (
-    <button 
-      className={`add-to-cart-button w-full py-3 px-6 ${className}`}
-      onClick={() => addToCart(shirt)}
-    >
-      <span className="cart-icon">🛒</span>
-      Add to Cart
-    </button>
+    <div className="mt-4">
+      <div ref={cardRef}>
+        <button
+          onClick={() => setShowSizeSelector(true)}
+          className={`add-to-cart-button px-6 py-3 ${className || ''}`}
+        >
+          <span className="cart-icon">🛒</span>
+          Add to Cart
+        </button>
+      </div>
+
+      {showSizeSelector && (
+        <SizeSelector
+          shirt={shirt}
+          onClose={() => setShowSizeSelector(false)}
+          onAddToCart={handleAddToCart}
+          cardRef={cardRef}
+        />
+      )}
+    </div>
   );
-};
+}

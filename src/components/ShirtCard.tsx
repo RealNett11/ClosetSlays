@@ -12,11 +12,10 @@ interface ShirtCardProps {
   shirt: Shirt;
 }
 
-export const ShirtCard = ({ shirt }: ShirtCardProps) => {
+export function ShirtCard({ shirt }: ShirtCardProps) {
   return (
     <Card className="group transition-all duration-300 bg-white/20 backdrop-blur-md rounded-xl overflow-hidden border border-black/20 hover:border-black/30 shadow-sm hover:shadow-lg hover:bg-white/30">
       <CardContent className="p-4">
-        {/* Image container - fully transparent */}
         <div className="aspect-square rounded-lg mb-4 overflow-hidden bg-transparent">
           <img
             src={shirt.image}
@@ -42,4 +41,4 @@ export const ShirtCard = ({ shirt }: ShirtCardProps) => {
       </CardContent>
     </Card>
   );
-};
+}
