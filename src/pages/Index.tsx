@@ -63,7 +63,7 @@ const Index = () => {
     },
     {
       id: 10,
-      name: "Bussy King",
+      name: "I Came Out For This ",
       price: "$20",
       image: "/placeholder.svg"
     },
@@ -75,7 +75,7 @@ const Index = () => {
     },
     {
       id: 12,
-      name: "unknown",
+      name: "Spread Love Like Glitter",
       price: "$20",
       image: "/placeholder.svg"
     }
@@ -93,7 +93,7 @@ const Index = () => {
                   Closeted Slays
                 </span>
               </h1>
-              <p className="text-6xl tracking-normal font-bold text-gray-900 textborder">Pride Shirts</p>
+              <p className="text-6xl tracking-norma font-bold text-gray-900 textborder">Pride Shirts</p>
               
               <div className="flex items-center justify-center gap-4">
                 <p className="text-2xl font-bold text-gray-600">Spread Love With Pride</p>
