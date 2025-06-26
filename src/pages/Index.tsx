@@ -60,6 +60,24 @@ const Index = () => {
       name: "Amazon Pride - Two Gay Delivery",
       price: "$20",
       image: "/images/AmazonPrideS.png"
+    },
+    {
+      id: 10,
+      name: "Bussy King",
+      price: "$20",
+      image: "/placeholder.svg"
+    },
+    {
+      id: 11,
+      name: "Gaytorade",
+      price: "$20",
+      image: "/placeholder.svg"
+    },
+    {
+      id: 12,
+      name: "unknown",
+      price: "$20",
+      image: "/placeholder.svg"
     }
   ];
 
@@ -90,15 +108,15 @@ const Index = () => {
           </div>
 
           {/* New Prominent View Cart Button with Rainbow Glow */}
-<div className="mb-8 text-center">
-  <button 
-    onClick={() => setIsCartOpen(true)}
-    className="add-to-cart-button w-full max-w-2xl mx-auto py-4 px-8 text-2xl font-bold flex items-center justify-center gap-2"
-  >
-    <span className="cart-icon">🛒</span>
-    View Your Cart
-  </button>
-</div>
+          <div className="mb-8 text-center">
+            <button 
+              onClick={() => setIsCartOpen(true)}
+              className="add-to-cart-button w-full max-w-2xl mx-auto py-4 px-8 text-2xl font-bold flex items-center justify-center gap-2"
+            >
+              <span className="cart-icon">🛒</span>
+              View Your Cart
+            </button>
+          </div>
 
           {/* Shirt Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto mb-12">
