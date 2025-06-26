@@ -26,7 +26,6 @@ const About = () => {
                   About Closet Slays
                 </span>
               </h1>
-
             </div>
 
             <div className="space-y-6 text-gray-700 leading-relaxed">

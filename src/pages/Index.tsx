@@ -93,7 +93,7 @@ const Index = () => {
                   Closeted Slays
                 </span>
               </h1>
-              <p className="text-6xl tracking-norma font-bold text-gray-900 textborder">Pride Shirts</p>
+              <p className="text-6xl tracking-normal font-bold text-gray-900 textborder">Pride Shirts</p>
               
               <div className="flex items-center justify-center gap-4">
                 <p className="text-2xl font-bold text-gray-600">Spread Love With Pride</p>

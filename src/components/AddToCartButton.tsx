@@ -3,8 +3,7 @@ import { SizeSelector } from './SizeSelector';
 import { useCart } from './CartContext';
 
 interface AddToCartButtonProps {
-    className?: string;
-
+  className?: string;
   shirt: {
     id: number;
     name: string;
@@ -13,7 +12,7 @@ interface AddToCartButtonProps {
   };
 }
 
-export function AddToCartButton({ shirt }: AddToCartButtonProps) {
+export function AddToCartButton({ className, shirt }: AddToCartButtonProps) {
   const [showSizeSelector, setShowSizeSelector] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
   const { addToCart } = useCart();
@@ -31,7 +30,7 @@ export function AddToCartButton({ shirt }: AddToCartButtonProps) {
       <div ref={cardRef}>
         <button
           onClick={() => setShowSizeSelector(true)}
-          className="add-to-cart-button  px-6 py-3"
+          className={`add-to-cart-button px-6 py-3 ${className || ''}`}
         >
           <span className="cart-icon">🛒</span>
           Add to Cart
