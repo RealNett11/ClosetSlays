@@ -57,9 +57,9 @@ const Index = () => {
     },
     {
       id: 9,
-      name: "Amazon Pride - Two Gay Delivery",
+      name: "Spread Love Like Glitter",
       price: "$20",
-      image: "/images/AmazonPrideS.png"
+      image: "/images/SpreadLoveLikeGlitterS.png"
     },
     {
       id: 10,
@@ -69,9 +69,9 @@ const Index = () => {
     },
     {
       id: 11,
-      name: "Spread Love Like Glitter",
+      name: "Amazon Pride - Two Gay Delivery",
       price: "$20",
-      image: "/images/SpreadLoveLikeGlitterS.png"
+      image: "/images/AmazonPrideS.png"
     },
     {
       id: 12,
