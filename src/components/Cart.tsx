@@ -141,7 +141,7 @@ export const Cart: React.FC<CartProps> = ({ onClose }) => {
                   </div>
                   <div className="flex items-center">
                     <button 
-                      onClick={() => updateQuantity(item.id, Math.max(1, item.quantity - 1))}
+                      onClick={() => updateQuantity(item.id, Math.max(1, item.quantity - 1), item.size)}
                       className="px-3 py-1 bg-gray-200 rounded-l hover:bg-gray-300"
                       disabled={item.quantity <= 1}
                     >
@@ -149,13 +149,13 @@ export const Cart: React.FC<CartProps> = ({ onClose }) => {
                     </button>
                     <span className="px-4 py-1 bg-gray-100">{item.quantity}</span>
                     <button 
-                      onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                      onClick={() => updateQuantity(item.id, item.quantity + 1, item.size)}
                       className="px-3 py-1 bg-gray-200 rounded-r hover:bg-gray-300"
                     >
                       +
                     </button>
                     <button 
-                      onClick={() => removeFromCart(item.id)}
+                      onClick={() => removeFromCart(item.id, item.size)}
                       className="ml-4 text-red-500 hover:text-red-700 font-medium"
                     >
                       Remove

@@ -13,8 +13,8 @@ interface CartItem {
 interface CartContextType {
   cartItems: CartItem[];
   addToCart: (item: Omit<CartItem, 'quantity'>) => void;
-  removeFromCart: (id: number) => void;
-  updateQuantity: (id: number, quantity: number) => void;
+  removeFromCart: (id: number, size?: string) => void;
+  updateQuantity: (id: number, quantity: number, size?: string) => void;
   clearCart: () => void;
   totalItems: number;
   totalPrice: number;
@@ -50,18 +50,25 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     });
   };
 
-  const removeFromCart = (id: number) => {
-    setCartItems(prevItems => prevItems.filter(item => item.id !== id));
+  const removeFromCart = (id: number, size?: string) => {
+    setCartItems(prevItems => prevItems.filter(item => {
+      // If size is provided, remove only the specific item with matching id and size
+      if (size) {
+        return !(item.id === id && item.size === size);
+      }
+      // Otherwise remove all items with the matching id (backward compatibility)
+      return item.id !== id;
+    }));
   };
 
-  const updateQuantity = (id: number, quantity: number) => {
+  const updateQuantity = (id: number, quantity: number, size?: string) => {
     if (quantity <= 0) {
-      removeFromCart(id);
+      removeFromCart(id, size);
       return;
     }
     setCartItems(prevItems =>
       prevItems.map(item =>
-        item.id === id ? { ...item, quantity } : item
+        item.id === id && (!size || item.size === size) ? { ...item, quantity } : item
       )
     );
   };
