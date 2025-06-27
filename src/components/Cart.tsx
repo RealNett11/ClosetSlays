@@ -29,14 +29,19 @@ export const Cart: React.FC<CartProps> = ({ onClose }) => {
       // Use the appropriate backend URL based on environment
       const backendUrl = import.meta.env.MODE === 'production' 
         ? 'https://api.closetslays.com/api/create-checkout-session'
-        : 'http://closetslays-b-env.eba-etpxeejf.us-east-2.elasticbeanstalk.com/api/create-checkout-session';
+        : 'http://localhost:3001/api/create-checkout-session';
         
       console.log(`Checkout initiated in ${import.meta.env.MODE} mode`);
         
+      // Log the Stripe mode being used to help with debugging
+      const stripeMode = import.meta.env.VITE_STRIPE_MODE || 'test';
+      console.log(`Using Stripe mode: ${stripeMode}`);
+      
       const response = await fetch(backendUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'X-Stripe-Mode': stripeMode, // Add as header for more visibility
         },
         body: JSON.stringify({
           items: cartItems.map(item => ({
@@ -46,7 +51,7 @@ export const Cart: React.FC<CartProps> = ({ onClose }) => {
             quantity: item.quantity,
             size: item.size,
           })),
-          mode: import.meta.env.MODE // Pass the current environment mode to the backend
+          mode: stripeMode // Explicitly use the Stripe mode from env vars
         }),
       });
 
@@ -62,6 +67,12 @@ export const Cart: React.FC<CartProps> = ({ onClose }) => {
       }
 
       const session = await response.json();
+      
+      // Log the session details to help with debugging (excluding sensitive data)
+      console.log('Checkout session created:', { 
+        id: session.id ? session.id.substring(0, 5) + '...' : 'undefined',
+        mode: session.mode || 'unknown'
+      });
       
       const result = await stripe.redirectToCheckout({
         sessionId: session.id,
