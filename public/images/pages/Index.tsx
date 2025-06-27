@@ -57,29 +57,28 @@ const Index = () => {
     },
     {
       id: 9,
-      name: "Spread Love Like Glitter",
-      price: "$20",
-      image: "/images/SpreadLoveLikeGlitterS.png"
-    },
-    {
-      id: 10,
-      name: "I Came Out For This ",
-      price: "$20",
-      image: "/images/ICameOutForThisS.png"
-    },
-    {
-      id: 11,
       name: "Amazon Pride - Two Gay Delivery",
       price: "$20",
       image: "/images/AmazonPrideS.png"
     },
     {
-      id: 12,
+      id: 10,
+      name: "I Came Out For This ",
+      price: "$20",
+      image: "/placeholder.svg"
+    },
+    {
+      id: 11,
       name: "Gaytorade",
       price: "$20",
-      image: "/images/GaytoradeS.png"
+      image: "/placeholder.svg"
+    },
+    {
+      id: 12,
+      name: "Spread Love Like Glitter",
+      price: "$20",
+      image: "/placeholder.svg"
     }
-    
   ];
 
   return (
