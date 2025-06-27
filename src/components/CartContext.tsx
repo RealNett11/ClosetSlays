@@ -1,4 +1,5 @@
-import { createContext, useContext, useState, ReactNode } from 'react';
+import { createContext, useContext, useState, ReactNode, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
 interface CartItem {
   id: number;
@@ -23,6 +24,14 @@ const CartContext = createContext<CartContextType | undefined>(undefined);
 
 export const CartProvider = ({ children }: { children: ReactNode }) => {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const location = useLocation();
+  
+  // Clear cart when redirected to success page
+  useEffect(() => {
+    if (location.pathname === '/success' && location.search.includes('session_id')) {
+      clearCart();
+    }
+  }, [location]);
 
   const addToCart = (item: Omit<CartItem, 'quantity'>) => {
     setCartItems(prevItems => {

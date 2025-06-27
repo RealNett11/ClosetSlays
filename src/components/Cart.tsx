@@ -5,6 +5,7 @@ interface CartProps {
   onClose: () => void;
 }
 
+// Initialize Stripe with the publishable key from environment variables
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY || '');
 
 export const Cart: React.FC<CartProps> = ({ onClose }) => {
@@ -25,8 +26,14 @@ export const Cart: React.FC<CartProps> = ({ onClose }) => {
         throw new Error('Stripe failed to initialize');
       }
 
-      // Always use localhost:3001 for development
-      const response = await fetch('http://localhost:3001/api/create-checkout-session', {
+      // Use the appropriate backend URL based on environment
+      const backendUrl = import.meta.env.MODE === 'production' 
+        ? 'https://api.closetslays.com/api/create-checkout-session'
+        : 'http://closetslays-b-env.eba-etpxeejf.us-east-2.elasticbeanstalk.com/api/create-checkout-session';
+        
+      console.log(`Checkout initiated in ${import.meta.env.MODE} mode`);
+        
+      const response = await fetch(backendUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -39,6 +46,7 @@ export const Cart: React.FC<CartProps> = ({ onClose }) => {
             quantity: item.quantity,
             size: item.size,
           })),
+          mode: import.meta.env.MODE // Pass the current environment mode to the backend
         }),
       });
 
