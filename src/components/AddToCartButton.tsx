@@ -61,7 +61,7 @@ export function AddToCartButton({ className, shirt }: AddToCartButtonProps) {
       <div>
         <button
           onClick={() => setShowSizeSelector(true)}
-          className={`add-to-cart-button px-6 py-3 ${className || ''}`}
+          className={`add-to-cart-button px-4 md:px-6 py-2 md:py-3 ${className || ''}`}
         >
           <span className="cart-icon">🛒</span>
           Add to Cart
