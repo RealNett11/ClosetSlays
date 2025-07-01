@@ -1,8 +1,45 @@
 import { ShirtCard } from "@/components/ShirtCard";
 import { Link } from "react-router-dom";
-import { CartProvider } from '@/components/CartContext';
+import { useCart } from '@/components/CartContext';
 import { Cart } from '@/components/Cart';
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
+
+// Cart button component that uses the cart context
+const CartButton = ({ onClick }: { onClick: () => void }) => {
+  const { totalItems } = useCart();
+  const prevItemsRef = useRef(totalItems);
+  const [animate, setAnimate] = useState(false);
+  
+  useEffect(() => {
+    // Only animate when the count increases
+    if (totalItems > prevItemsRef.current) {
+      setAnimate(true);
+      const timer = setTimeout(() => setAnimate(false), 600); // Match animation duration
+      return () => clearTimeout(timer);
+    }
+    prevItemsRef.current = totalItems;
+  }, [totalItems]);
+  
+  return (
+    <div className="w-full max-w-2xl mx-auto">
+      <button 
+        onClick={onClick}
+        className="add-to-cart-button w-full py-4 px-8 text-2xl font-bold flex items-center justify-center gap-2 relative"
+      >
+        <span className="cart-icon">🛒</span>
+        View Your Cart
+        
+        {totalItems > 0 && (
+          <div className="absolute top-0 right-0 transform -translate-y-1/2 translate-x-1/2 pointer-events-none">
+            <div className={`bg-red-600 text-white text-base font-bold rounded-full h-9 w-9 flex items-center justify-center shadow-md ${animate ? 'animate-plop' : ''}`}>
+              {totalItems}
+            </div>
+          </div>
+        )}
+      </button>
+    </div>
+  );
+};
 
 const Index = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -83,7 +120,7 @@ const Index = () => {
   ];
 
   return (
-    <CartProvider>
+
       <div className="min-h-screen bg-gradient-to-br from-red-200 via-pink-200 via-purple-200 via-blue-200 via-indigo-200 to-violet-200">
         <div className="container mx-auto px-4 py-8">
           {/* Main Banner with Title */}
@@ -109,14 +146,8 @@ const Index = () => {
           </div>
 
           {/* New Prominent View Cart Button with Rainbow Glow */}
-          <div className="mb-6 md:mb-8 text-center">
-            <button 
-              onClick={() => setIsCartOpen(true)}
-              className="add-to-cart-button w-full max-w-2xl mx-auto py-3 md:py-4 px-4 md:px-8 text-xl md:text-2xl font-bold flex items-center justify-center gap-2"
-            >
-              <span className="cart-icon">🛒</span>
-              View Your Cart
-            </button>
+          <div className="mb-8 text-center">
+            <CartButton onClick={() => setIsCartOpen(true)} />
           </div>
 
           {/* Shirt Grid */}
@@ -139,7 +170,7 @@ const Index = () => {
 
         {isCartOpen && <Cart onClose={() => setIsCartOpen(false)} />}
       </div>
-    </CartProvider>
+      
   );
 };
 

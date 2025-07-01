@@ -1,7 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { SizeSelector } from './SizeSelector';
 import { useCart } from './CartContext';
 import confetti from 'canvas-confetti';
+// Ensure confetti is properly initialized
+let canvasConfetti = confetti;
 
 interface AddToCartButtonProps {
   className?: string;
@@ -21,6 +23,9 @@ export function AddToCartButton({ className, shirt }: AddToCartButtonProps) {
   const fireConfetti = () => {
     // Create multiple bursts across the entire width
     const end = Date.now() + 700; // 1 second duration
+    
+    // Log message to console when confetti is fired
+    console.log('🎉 Celebration time! Confetti launched!');
     
     const frame = () => {
       // Launch from multiple positions across the entire width
@@ -48,12 +53,15 @@ export function AddToCartButton({ className, shirt }: AddToCartButtonProps) {
   };
 
   const handleAddToCart = (size: string) => {
+    // First fire confetti
+    fireConfetti();
+    
+    // Then update cart and close selector
     addToCart({
       ...shirt,
       size,
     });
     setShowSizeSelector(false);
-    fireConfetti();
   };
 
   return (
