@@ -1,6 +1,6 @@
 import { ShirtCard } from "@/components/ShirtCard";
 import { Link } from "react-router-dom";
-import { CartProvider, useCart } from '@/components/CartContext';
+import { useCart } from '@/components/CartContext';
 import { Cart } from '@/components/Cart';
 import { useState, useEffect, useRef } from 'react';
 
@@ -120,7 +120,6 @@ const Index = () => {
   ];
 
   return (
-    <CartProvider>
       <div className="min-h-screen bg-gradient-to-br from-red-200 via-pink-200 via-purple-200 via-blue-200 via-indigo-200 to-violet-200">
         <div className="container mx-auto px-4 py-8">
           {/* Main Banner with Title */}
@@ -170,7 +169,6 @@ const Index = () => {
 
         {isCartOpen && <Cart onClose={() => setIsCartOpen(false)} />}
       </div>
-    </CartProvider>
   );
 };
 
