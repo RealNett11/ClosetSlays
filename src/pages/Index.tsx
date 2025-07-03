@@ -126,11 +126,11 @@ const Index = () => {
           {/* Main Banner with Title */}
           <div className="bg-transparent backdrop-blur backdrop-contrast-125 backdrop-saturate-175 rounded-3xl p-4 md:p-6 mb-6 md:mb-8 border-2 border-white/20">
             <div className="text-center space-y-4 md:space-y-6">
-              <h1 className="text-3xl md:text-8xl font-bold mb-3 md:mb-4 tracking-tight">
-                <span className="text-4xl md:text-9xl animate-rainbow">
-                  Closeted Slays
-                </span>
+              <h1 className="text-4xl md:text-12xl font-bold mb-3 md:mb-4 tracking-tight">
+                {/* Desktop version - hidden on mobile */}
+                <span className="hidden md:inline text-4xl md:text-9xl animate-rainbow">Closeted Slays</span>
               </h1>
+              
               <p className="mt-6 md:mt-8 text-2xl md:text-6xl tracking-normal font-bold text-gray-900 textborder">Pride Shirts</p>
               
               <div className="flex flex-col md:flex-row items-center justify-center gap-3 md:gap-4">
@@ -145,8 +145,8 @@ const Index = () => {
             </div>
           </div>
 
-          {/* New Prominent View Cart Button with Rainbow Glow */}
-          <div className="mb-8 text-center">
+          {/* New Prominent View Cart Button with Rainbow Glow - hidden on mobile */}
+          <div className="mb-8 text-center hidden md:block">
             <CartButton onClick={() => setIsCartOpen(true)} />
           </div>
 
@@ -170,7 +170,7 @@ const Index = () => {
 
         {isCartOpen && <Cart onClose={() => setIsCartOpen(false)} />}
       </div>
-      
+
   );
 };
 

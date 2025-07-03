@@ -22,13 +22,13 @@ export function StickyCartButton() {
     <>
       <button
         onClick={() => setShowCart(true)}
-        className={`fixed top-6 right-6 bg-black text-white add-to-cart-button rounded-full px-5 py-3 shadow-lg flex items-center gap-2 z-50 hover:bg-gray-800 transition-colors transform hover:scale-105 ${totalItems > 0 ? 'animate-float' : ''}`}
+        className={`fixed top-6 right-6 bg-black text-white add-to-cart-button rounded-full md:px-5 px-3 py-3 shadow-lg flex items-center gap-2 z-50 hover:bg-gray-800 transition-colors transform hover:scale-105 ${totalItems > 0 ? 'animate-float' : ''}`}
         style={{
           boxShadow: totalItems > 0 ? '0 0 15px rgba(255, 105, 180, 0.7)' : '0 4px 6px rgba(0, 0, 0, 0.1)',
         }}
       >
         <span className="text-xl">🛒</span>
-        <span className="font-medium">View Cart</span>
+        <span className="font-medium hidden md:inline">View Cart</span>
         {totalItems > 0 && (
           <span className={`bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm ${animate ? 'animate-plop' : ''}`}>
             {totalItems}
