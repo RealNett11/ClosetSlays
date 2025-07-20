@@ -14,13 +14,13 @@ interface ShirtCardProps {
 
 export function ShirtCard({ shirt }: ShirtCardProps) {
   return (
-    <Card className="group transition-all duration-300 bg-white/20 backdrop-blur-md rounded-xl overflow-hidden border border-black/20 hover:border-black/30 shadow-sm hover:shadow-lg hover:bg-white/30">
+    <Card className="group transition-all duration-300 bg-white/20 backdrop-blur-md rounded-xl overflow-hidden border border-black/20 hover:border-black/30 shadow-sm hover:shadow-lg hover:bg-white/30 relative">
       <CardContent className="p-3 md:p-4">
         <div className="aspect-square rounded-lg mb-3 md:mb-4 overflow-hidden bg-transparent">
           <img
             src={shirt.image}
             alt={`${shirt.name} shirt`}
-            className="object-contain w-full h-full transition-transform duration-300 group-hover:scale-[1.03]"
+            className="object-contain w-full h-full transition-transform duration-300 md:group-hover:scale-[1.03]"
             loading="lazy"
             onError={(e) => {
               const target = e.target as HTMLImageElement;

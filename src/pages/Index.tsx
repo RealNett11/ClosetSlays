@@ -120,58 +120,59 @@ const Index = () => {
   ];
 
   return (
-
-      <div className="min-h-screen bg-gradient-to-br from-red-200 via-pink-200 via-purple-200 via-blue-200 via-indigo-200 to-violet-200">
-        <div className="container mx-auto px-4 py-8">
-          {/* Main Banner with Title */}
-          <div className="bg-transparent backdrop-blur backdrop-contrast-125 backdrop-saturate-175 rounded-3xl p-4 md:p-6 mb-6 md:mb-8 border-2 border-white/20">
-            <div className="text-center space-y-4 md:space-y-6">
-              <h1 className="text-4xl md:text-12xl font-bold mb-3 md:mb-4 tracking-tight">
-                {/* Desktop version - hidden on mobile */}
-                <span className="hidden md:inline text-4xl md:text-9xl animate-rainbow">Closeted Slays</span>
-              </h1>
-              
-              <p className="mt-6 md:mt-8 text-2xl md:text-6xl tracking-normal font-bold text-gray-900 textborder">Pride Shirts</p>
-              
-              <div className="flex flex-col md:flex-row items-center justify-center gap-3 md:gap-4">
-                <p className="text-xl md:text-2xl font-bold text-gray-600">Spread Love With Pride</p>
-                <Link 
-                  to="/about" 
-                  className="text-white bg-black font-medium py-2 px-4 rounded-full transition-all duration-200 hover:scale-105 shadow hover:shadow-md text-sm"
-                >
-                  About Us
-                </Link>
-              </div>
+    <div className="min-h-screen bg-gradient-to-br from-red-200 via-pink-200 via-purple-200 via-blue-200 via-indigo-200 to-violet-200">
+      <div className="container mx-auto px-4 py-8">
+        {/* Main Banner with Title */}
+        <div className="bg-transparent backdrop-blur backdrop-contrast-125 backdrop-saturate-175 rounded-3xl p-4 md:p-6 mb-6 md:mb-8 border-2 border-white/20">
+          <div className="text-center space-y-4 md:space-y-6">
+            <h1 className="text-4xl md:text-12xl font-bold mb-3 md:mb-4 tracking-tight">
+              {/* Desktop version - hidden on mobile */}
+              <span className="hidden md:inline text-4xl md:text-9xl animate-rainbow">Closeted Slays</span>
+            </h1>
+            
+            <p className="mt-6 md:mt-8 text-2xl md:text-6xl tracking-normal font-bold text-gray-900 textborder">Pride Shirts</p>
+            
+            <div className="flex flex-col md:flex-row items-center justify-center gap-3 md:gap-4">
+              <p className="text-xl md:text-2xl font-bold text-gray-600">Spread Love With Pride</p>
+              <Link 
+                to="/about" 
+                className="text-white bg-black font-medium py-2 px-4 rounded-full transition-all duration-200 hover:scale-105 shadow hover:shadow-md text-sm"
+              >
+                About Us
+              </Link>
             </div>
-          </div>
-
-          {/* New Prominent View Cart Button with Rainbow Glow - hidden on mobile */}
-          <div className="mb-8 text-center hidden md:block">
-            <CartButton onClick={() => setIsCartOpen(true)} />
-          </div>
-
-          {/* Shirt Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8 max-w-6xl mx-auto mb-8 md:mb-12">
-            {shirts.map((shirt) => (
-              <ShirtCard key={shirt.id} shirt={shirt} />
-            ))}
-          </div>
-
-          {/* Large About Us Button at bottom */}
-          <div className="text-center">
-            <Link 
-              to="/about" 
-              className="inline-block add-to-cart-button text-white bg-black font-semibold py-3 md:py-4 px-6 md:px-8 rounded-full transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl"
-            >
-              About Us
-            </Link>
           </div>
         </div>
 
-        {isCartOpen && <Cart onClose={() => setIsCartOpen(false)} />}
+        {/* New Prominent View Cart Button with Rainbow Glow - hidden on mobile */}
+        <div className="mb-8 text-center hidden md:block">
+          <CartButton onClick={() => setIsCartOpen(true)} />
+        </div>
+
+        {/* Shirt Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8 max-w-6xl mx-auto mb-8 md:mb-12">
+          {shirts.map((shirt) => (
+            <ShirtCard key={shirt.id} shirt={shirt} />
+          ))}
+        </div>
+
+        {/* Large About Us Button at bottom */}
+        <div className="text-center">
+          <Link 
+            to="/about" 
+            className="inline-block add-to-cart-button text-white bg-black font-semibold py-3 md:py-4 px-6 md:px-8 rounded-full transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl"
+          >
+            About Us
+          </Link>
+        </div>
       </div>
 
+      {isCartOpen && <Cart onClose={() => setIsCartOpen(false)} />}
+    </div>
+
   );
+
+  
 };
 
 export default Index;
