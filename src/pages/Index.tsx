@@ -126,8 +126,7 @@ const Index = () => {
         <div className="bg-transparent backdrop-blur backdrop-contrast-125 backdrop-saturate-175 rounded-3xl p-4 md:p-6 mb-6 md:mb-8 border-2 border-white/20">
           <div className="text-center space-y-4 md:space-y-6">
             <h1 className="text-4xl md:text-12xl font-bold mb-3 md:mb-4 tracking-tight">
-              {/* Desktop version - hidden on mobile */}
-              <span className="hidden md:inline text-4xl md:text-9xl animate-rainbow">Closeted Slays</span>
+            <span className="hidden md:inline text-4xl md:text-9xl animate-rainbow">Closeted Slays</span>
             </h1>
             
             <p className="mt-6 md:mt-8 text-2xl md:text-6xl tracking-normal font-bold text-gray-900 textborder">Pride Shirts</p>
@@ -156,24 +155,35 @@ const Index = () => {
           ))}
         </div>
 
-        {/* Large About Us Button at bottom with payment logos */}
-        <div className="flex items-center justify-center gap-4 mb-8">
-          <div className="flex items-center gap-4">
-            <img src="/images/Visa-Payment-Card.png" alt="Visa" style={{height: "71px", width: "100px", objectFit: "contain"}} />
-            <img src="/images/mastercard-payment.png" alt="Mastercard" style={{height: "71px", width: "100px", objectFit: "contain", transform: "scale(0.75)"}} />
-
-          </div>
-          
-          <Link 
-            to="/about" 
-            className="inline-block add-to-cart-button text-white bg-black font-semibold py-3 md:py-4 px-6 md:px-8 rounded-full transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl mx-4"
-          >
-            About Us
-          </Link>
-          
-          <div className="flex items-center gap-4">
-            <img src="/images/AmericanEX-Payment.png" alt="American Express" style={{height: "55px", width: "100px", objectFit: "contain"}} />
-            <img src="/images/stripe Icon.png" alt="Stripe" style={{height: "54px", width: "100px", objectFit: "contain"}} />
+        {/* Payment section with adjusted mobile heights */}
+        <div className="w-full flex items-center justify-center overflow-x-auto py-2 md:py-0 mb-8 no-scrollbar">
+          <div className="flex items-center justify-center min-w-max gap-2 md:gap-4 px-4">
+            <img 
+              src="/images/Visa-Payment-Card.png" 
+              alt="Visa" 
+              className="h-[50px] md:h-[71px] w-14 md:w-[100px] object-contain" 
+            />
+            <img 
+              src="/images/mastercard-payment.png" 
+              alt="Mastercard" 
+              className="h-[38px] md:h-[71px] w-14 md:w-[100px] object-contain md:scale-75" 
+            />
+            <Link 
+              to="/about" 
+              className="mx-2 md:mx-4 inline-block add-to-cart-button text-white bg-black font-semibold py-2 md:py-4 px-4 md:px-8 rounded-full transition-all duration-200 transform hover:scale-105 shadow hover:shadow-md text-sm md:text-base"
+            >
+              About Us
+            </Link>
+            <img 
+              src="/images/AmericanEX-Payment.png" 
+              alt="American Express" 
+              className="h-[50px] md:h-[57px] w-14 md:w-[100px] object-contain" 
+            />
+            <img 
+              src="/images/stripe Icon.png" 
+              alt="Stripe" 
+              className="h-9 md:h-[54px] w-14 md:w-[100px] object-contain" 
+            />
           </div>
         </div>
       </div>
@@ -183,7 +193,6 @@ const Index = () => {
 
   );
 
-  
 };
 
 export default Index;
