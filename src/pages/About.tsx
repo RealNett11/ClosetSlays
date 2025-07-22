@@ -77,7 +77,7 @@ const About = () => {
               <div className="bg-gray-50/80 rounded-2xl p-6 border border-gray-100">
                 <h2 className="text-2xl font-semibold text-gray-800 mb-4">💳 Secure Payments</h2>
                 <p className="text-lg">
-                  All prices are listed in USD ($). Payments are processed securely through Stripe and comply with PCI standards. Your payment information is encrypted and protected throughout checkout.
+                  All prices are listed in USD ($). Payments are processed securely through Stripe and comply with PCI standards. Your payment information is encrypted and protected throughout checkout. As well as this we collect no meta data and information.
                 </p>
               </div>
             </div>
@@ -87,7 +87,7 @@ const About = () => {
               <div className="bg-gray-50/80 rounded-2xl p-6 border border-gray-100">
                 <h2 className="text-2xl font-semibold text-gray-800 mb-4">📬 Contact Us</h2>
                 <p className="text-lg">
-                  Have questions or just want to say hello? Reach out to us at <span className="font-bold">closetslays@proton.me</span>. We'd love to hear from you about anything - from product inquiries to suggestions for new designs that celebrate our community.
+                  Have questions or just want to say hello? Reach out to us at <span className="font-bold">closetslays@proton.me</span> or <span className="font-bold">763-283-0779</span>. We'd love to hear from you about anything - from product inquiries to suggestions for new designs that celebrate our community.
                 </p>
               </div>
 
