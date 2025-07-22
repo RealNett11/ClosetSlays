@@ -156,14 +156,25 @@ const Index = () => {
           ))}
         </div>
 
-        {/* Large About Us Button at bottom */}
-        <div className="text-center">
+        {/* Large About Us Button at bottom with payment logos */}
+        <div className="flex items-center justify-center gap-4 mb-8">
+          <div className="flex items-center gap-4">
+            <img src="/images/Visa-Payment-Card.png" alt="Visa" style={{height: "71px", width: "100px", objectFit: "contain"}} />
+            <img src="/images/mastercard-payment.png" alt="Mastercard" style={{height: "71px", width: "100px", objectFit: "contain", transform: "scale(0.75)"}} />
+
+          </div>
+          
           <Link 
             to="/about" 
-            className="inline-block add-to-cart-button text-white bg-black font-semibold py-3 md:py-4 px-6 md:px-8 rounded-full transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl"
+            className="inline-block add-to-cart-button text-white bg-black font-semibold py-3 md:py-4 px-6 md:px-8 rounded-full transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl mx-4"
           >
             About Us
           </Link>
+          
+          <div className="flex items-center gap-4">
+            <img src="/images/AmericanEX-Payment.png" alt="American Express" style={{height: "55px", width: "100px", objectFit: "contain"}} />
+            <img src="/images/stripe Icon.png" alt="Stripe" style={{height: "54px", width: "100px", objectFit: "contain"}} />
+          </div>
         </div>
       </div>
 
