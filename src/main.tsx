@@ -1,6 +1,8 @@
 import { createRoot } from 'react-dom/client'
 import App from './App.tsx'
 import './index.css'
+import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 // Add global error handler for module loading errors
 window.addEventListener('error', (event) => {
