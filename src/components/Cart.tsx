@@ -54,6 +54,7 @@ export const Cart: React.FC<CartProps> = ({ onClose }) => {
             price: parseFloat(item.price.replace('$', '')),
             quantity: item.quantity,
             size: item.size,
+            printful_variant_id: item.printful_variant_id || ''
           })),
           mode: stripeMode // Explicitly use the Stripe mode from env vars
         }),

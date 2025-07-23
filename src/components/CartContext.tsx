@@ -7,6 +7,7 @@ interface CartItem {
   image: string;
   quantity: number;
   size?: string;
+  printful_variant_id?: string;
 }
 
 interface CartContextType {

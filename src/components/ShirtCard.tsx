@@ -6,6 +6,7 @@ interface Shirt {
   name: string;
   price: string;
   image: string;
+  printful_variant_id?: string;
 }
 
 interface ShirtCardProps {
