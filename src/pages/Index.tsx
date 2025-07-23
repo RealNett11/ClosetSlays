@@ -48,75 +48,87 @@ const Index = () => {
       id: 1,
       name: "GNC - Gay & Cranky",
       price: "$20",
-      image: "/images/GNCS.png"
+      image: "/images/GNCS.png",
+      printful_variant_id: "685c13aae55b79"
     },
     {
       id: 2,
       name: "This Shirt Is Gay",
       price: "$20",
-      image: "/images/ThisShirtIsGayS.png"
+      image: "/images/ThisShirtIsGayS.png",
+      printful_variant_id: "685c109caeacd4"
     },
     {
       id: 3,
       name: "Supreme Shirt",
       price: "$20",
-      image: "/images/supremeS.png"
-    },
+      image: "/images/supremeS.png",
+      printful_variant_id: "685c1355135477"
+    },   
     {
       id: 4,
       name: "Slay Now Cry Later",
       price: "$20",
-      image: "/images/SlayNowCryLaterS.png"
+      image: "/images/SlayNowCryLaterS.png",
+      printful_variant_id: "685c1218762068"
     },
     {
       id: 5,
       name: "Homo Depot",
       price: "$20",
-      image: "/images/TheHomeDepotS.png"
+      image: "/images/TheHomeDepotS.png",
+      printful_variant_id: "685c13ded186b6"
     },
     {
       id: 6,
       name: "Emotionally Attached to My Air Fryer",
       price: "$20",
-      image: "/images/AirFryerS.png"
+      image: "/images/AirFryerS.png",
+      printful_variant_id: "685c140faf8594"
     },
     {
       id: 7,
       name: "Dept of Gay Affairs",
       price: "$20",
-      image: "/images/Dept-GayAffairsS.png"
+      image: "/images/Dept-GayAffairsS.png",
+      printful_variant_id: "685c143193f7d8"
     },
     {
       id: 8,
       name: "GAY™",
       price: "$20",
-      image: "/images/gay-tm.png"
+      image: "/images/gay-tm.png",
+      printful_variant_id: "685c14cdc433f6"
     },
     {
       id: 9,
       name: "Spread Love Like Glitter",
       price: "$20",
-      image: "/images/SpreadLoveLikeGlitterS.png"
+      image: "/images/SpreadLoveLikeGlitterS.png",
+      printful_variant_id: "685d84ea823033"
     },
     {
       id: 10,
-      name: "I Came Out For This ",
+      name: "I Came Out For This",
       price: "$20",
-      image: "/images/ICameOutForThisS.png"
+      image: "/images/ICameOutForThisS.png",
+      printful_variant_id: "685d7287b13a49"
     },
     {
       id: 11,
       name: "Amazon Pride - Two Gay Delivery",
       price: "$20",
-      image: "/images/AmazonPrideS.png"
+      image: "/images/AmazonPrideS.png",
+      printful_variant_id: "685c145a154a44"
     },
     {
       id: 12,
       name: "Gaytorade",
       price: "$20",
-      image: "/images/GaytoradeS.png"
+      image: "/images/GaytoradeS.png",
+      printful_variant_id: "685d777c5ffc86"
     }
-    
+
   ];
 
   return (
