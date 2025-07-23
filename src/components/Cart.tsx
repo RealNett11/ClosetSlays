@@ -1,12 +1,9 @@
 import { useCart } from './CartContext';
-import { loadStripe } from '@stripe/stripe-js';
+import { stripePromise, getStripeApiUrl } from '../lib/stripe';
 
 interface CartProps {
   onClose: () => void;
 }
-
-// Initialize Stripe with the publishable key from environment variables
-const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY || '');
 
 export const Cart: React.FC<CartProps> = ({ onClose }) => {
   const {
@@ -26,10 +23,8 @@ export const Cart: React.FC<CartProps> = ({ onClose }) => {
         throw new Error('Stripe failed to initialize');
       }
 
-      // Use the appropriate backend URL based on environment
-      const backendUrl = import.meta.env.MODE === 'production' 
-        ? 'https://api.closetslays.com/api/create-checkout-session'
-        : 'http://localhost:3001/api/create-checkout-session';
+      // Use the appropriate backend URL from our utility
+      const backendUrl = getStripeApiUrl();
         
       console.log(`Checkout initiated in ${import.meta.env.MODE} mode`);
         
