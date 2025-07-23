@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 
 const About = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  
   return (
-    <div className="min-h-screen bg-gradient-to-br from-red-200 via-pink-200 via-purple-200 via-blue-200 via-indigo-200 to-violet-200">
+    <div id="top" className="min-h-screen bg-gradient-to-br from-red-200 via-pink-200 via-purple-200 via-blue-200 via-indigo-200 to-violet-200">
       <div className="container mx-auto px-4 py-8">
         {/* Back Button */}
         <div className="mb-8">
@@ -29,6 +33,7 @@ const About = () => {
             </div>
 
             <div className="space-y-6 text-gray-700 leading-relaxed">
+              {/* Our Vision */}
               <div className="bg-gray-50/80 rounded-2xl p-6 border border-gray-100">
                 <h2 className="text-2xl font-semibold text-gray-800 mb-4">🏳️‍🌈 Our Vision</h2>
                 <p className="text-lg">
@@ -36,6 +41,7 @@ const About = () => {
                 </p>
               </div>
 
+              {/* Giving Back */}
               <div className="bg-gray-50/80 rounded-2xl p-6 border border-gray-100">
                 <h2 className="text-2xl font-semibold text-gray-800 mb-4">🤝 Giving Back</h2>
                 <p className="text-lg">
@@ -43,28 +49,51 @@ const About = () => {
                 </p>
               </div>
 
+              {/* Supporting Education */}
               <div className="bg-gray-50/80 rounded-2xl p-6 border border-gray-100">
                 <h2 className="text-2xl font-semibold text-gray-800 mb-4">💝 Supporting Education</h2>
                 <p className="text-lg">
                   We're a student-founded small business working hard to save for college. Your support doesn't just get you amazing pride apparel - it helps us pursue our educational dreams and build a future where we can continue making a difference through our work.
                 </p>
               </div>
-                
+
+              {/* Delivery Policy */}
               <div className="bg-gray-50/80 rounded-2xl p-6 border border-gray-100">
-                <h2 className="text-2xl font-semibold text-gray-800 mb-4">🛍️ Refund Policy</h2>
+                <h2 className="text-2xl font-semibold text-gray-800 mb-4">🚚 Delivery Policy</h2>
                 <p className="text-lg">
-                  We offer refunds within 30 days with proof of purchase. Your satisfaction is important to us, and we're committed to making things right if you're not completely happy with your order.
+                  All items are made to order and typically ship within 3–7 business days. Once your order has shipped, you'll receive a tracking number via email.
                 </p>
               </div>
 
+              {/* Refund & Cancellation Policy */}
               <div className="bg-gray-50/80 rounded-2xl p-6 border border-gray-100">
-                <h2 className="text-2xl font-semibold text-gray-800 mb-4">📬 Contact Us</h2>
+                <h2 className="text-2xl font-semibold text-gray-800 mb-4">🛍️ Refund & Cancellation Policy</h2>
                 <p className="text-lg">
-                  Have questions or just want to say hello? Reach out to us at <span className="font-bold">closetslays@proton.me</span>. We'd love to hear from you about anything - from product inquiries to suggestions for new designs that celebrate our community.
+                  We offer refunds within 30 days with proof of purchase. Your satisfaction is important to us, and we're committed to making things right if you're not completely happy with your order. Please note: orders cannot be cancelled once placed, as production begins shortly after purchase.
+                </p>
+              </div>
+
+{/* Secure Payments */}
+              <div className="bg-gray-50/80 rounded-2xl p-6 border border-gray-100">
+                <h2 className="text-2xl font-semibold text-gray-800 mb-4">💳 Secure Payments</h2>
+                <p className="text-lg">
+                  All prices are listed in USD ($). Payments are processed securely through Stripe and comply with PCI standards. Your payment information is encrypted and protected throughout checkout. As well as this we collect no meta data and information.
                 </p>
               </div>
             </div>
 
+            
+              {/* Contact Us */}
+              <div className="bg-gray-50/80 rounded-2xl p-6 border border-gray-100">
+                <h2 className="text-2xl font-semibold text-gray-800 mb-4">📬 Contact Us</h2>
+                <p className="text-lg">
+                  Have questions or just want to say hello? Reach out to us at <span className="font-bold">closetslays@proton.me</span> or <span className="font-bold">612-470-6557</span>. We'd love to hear from you about anything - from product inquiries to suggestions for new designs that celebrate our community.
+                </p>
+              </div>
+
+              
+
+            {/* CTA Button */}
             <div className="text-center mt-8">
               <Link 
                 to="/" 

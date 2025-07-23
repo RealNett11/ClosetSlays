@@ -14,13 +14,13 @@ interface ShirtCardProps {
 
 export function ShirtCard({ shirt }: ShirtCardProps) {
   return (
-    <Card className="group transition-all duration-300 bg-white/20 backdrop-blur-md rounded-xl overflow-hidden border border-black/20 hover:border-black/30 shadow-sm hover:shadow-lg hover:bg-white/30">
-      <CardContent className="p-4">
-        <div className="aspect-square rounded-lg mb-4 overflow-hidden bg-transparent">
+    <Card className="group transition-all duration-300 bg-white/20 backdrop-blur-md rounded-xl overflow-hidden border border-black/20 hover:border-black/30 shadow-sm hover:shadow-lg hover:bg-white/30 relative">
+      <CardContent className="p-3 md:p-4">
+        <div className="aspect-square rounded-lg mb-3 md:mb-4 overflow-hidden bg-transparent">
           <img
             src={shirt.image}
             alt={`${shirt.name} shirt`}
-            className="object-contain w-full h-full transition-transform duration-300 group-hover:scale-[1.03]"
+            className="object-contain w-full h-full transition-transform duration-300 md:group-hover:scale-[1.03]"
             loading="lazy"
             onError={(e) => {
               const target = e.target as HTMLImageElement;
@@ -30,11 +30,11 @@ export function ShirtCard({ shirt }: ShirtCardProps) {
           />
         </div>
         
-        <div className="text-center space-y-3">
-          <h3 className="font-medium text-lg text-gray-800 group-hover:text-black leading-tight">
+        <div className="text-center space-y-2 md:space-y-3">
+          <h3 className="font-medium text-base md:text-lg text-gray-800 group-hover:text-black leading-tight">
             {shirt.name}
           </h3>
-          <p className="text-2xl font-bold text-gray-700">{shirt.price}</p>
+          <p className="text-xl md:text-2xl font-bold text-gray-700">{shirt.price}</p>
           
           <AddToCartButton shirt={shirt} />
         </div>
