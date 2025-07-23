@@ -155,6 +155,14 @@ const Index = () => {
           ))}
         </div>
 
+        {/* Shirt Description */}
+        <div className="text-center max-w-3xl mx-auto mb-8 bg-white/20 backdrop-blur-md p-5 rounded-xl shadow-sm border border-black/20 hover:border-black/30 hover:bg-white/30">
+          <p className="text-gray-800 text-lg">
+            Each shirt is made from 100% ring-spun cotton and designed with a semi-fitted shape, soft side seams, and tear-away tags for a comfortable fit that feels as great as it looks.<br/>
+            Your support helps make a difference and empowers others.
+          </p>
+        </div>
+
         {/* Payment section with adjusted mobile heights */}
         <div className="w-full flex items-center justify-center overflow-x-auto py-2 md:py-0 mb-8 no-scrollbar">
           <div className="flex items-center justify-center min-w-max gap-2 md:gap-4 px-4">
