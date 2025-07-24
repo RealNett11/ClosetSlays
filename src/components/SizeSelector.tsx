@@ -6,6 +6,7 @@ interface SizeSelectorProps {
     name: string;
     price: string;
     image: string;
+    sizeToVariantId: Record<string, string>;
   };
   onClose: () => void;
   onAddToCart: (size: string) => void;

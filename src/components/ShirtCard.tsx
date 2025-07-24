@@ -6,7 +6,7 @@ interface Shirt {
   name: string;
   price: string;
   image: string;
-  printful_variant_id?: string;
+  sizeToVariantId: Record<string, string>;
 }
 
 interface ShirtCardProps {
@@ -30,13 +30,11 @@ export function ShirtCard({ shirt }: ShirtCardProps) {
             }}
           />
         </div>
-        
         <div className="text-center space-y-2 md:space-y-3">
           <h3 className="font-medium text-base md:text-lg text-gray-800 group-hover:text-black leading-tight">
             {shirt.name}
           </h3>
           <p className="text-xl md:text-2xl font-bold text-gray-700">{shirt.price}</p>
-          
           <AddToCartButton shirt={shirt} />
         </div>
       </CardContent>

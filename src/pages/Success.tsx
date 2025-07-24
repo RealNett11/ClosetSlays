@@ -23,23 +23,29 @@ const Success = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  // Get the clearCart function from the cart context
+  const { clearCart } = useCart();
+  
   useEffect(() => {
-    // You could verify the session with your backend if needed
-    if (sessionId) {
-      // Set success status after a short delay to simulate verification
-      const timer = setTimeout(() => {
-        setOrderStatus('success');
-        setShowConfetti(true);
-        
-        // Hide confetti after 8 seconds
-        setTimeout(() => setShowConfetti(false), 8000);
-      }, 1000);
+    // Log the URL parameters for debugging
+    console.log('URL search params:', Object.fromEntries(searchParams.entries()));
+    console.log('Session ID from URL:', sessionId);
+    
+    // Always show success page even if session_id is missing
+    // This is because Stripe sometimes doesn't include the session_id in the redirect
+    const timer = setTimeout(() => {
+      setOrderStatus('success');
+      setShowConfetti(true);
       
-      return () => clearTimeout(timer);
-    } else {
-      setOrderStatus('error');
-    }
-  }, [sessionId]);
+      // Clear the cart on successful order
+      clearCart();
+      
+      // Hide confetti after 8 seconds
+      setTimeout(() => setShowConfetti(false), 8000);
+    }, 1000);
+    
+    return () => clearTimeout(timer);
+  }, [searchParams, sessionId, clearCart]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-red-200 via-pink-200 via-purple-200 via-blue-200 via-indigo-200 to-violet-200 flex items-center justify-center">

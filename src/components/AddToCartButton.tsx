@@ -11,7 +11,7 @@ interface AddToCartButtonProps {
     name: string;
     price: string;
     image: string;
-    printful_variant_id?: string;
+    sizeToVariantId: Record<string, string>;
   };
 }
 
@@ -50,12 +50,12 @@ export function AddToCartButton({ className, shirt }: AddToCartButtonProps) {
   };
 
   const handleAddToCart = (size: string) => {
-
     fireConfetti();
-
+    const variantId = shirt.sizeToVariantId[size];
     addToCart({
       ...shirt,
       size,
+      printful_variant_id: variantId,
     });
     setShowSizeSelector(false);
   };
