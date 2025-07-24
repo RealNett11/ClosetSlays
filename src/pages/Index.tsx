@@ -45,18 +45,18 @@ const Index = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
   // Each shirt now has a sizeToVariantId mapping for Printful compliance
   const shirts = [
+    // All shirts use the same Printful variant IDs for S, M, L, XL, 2XL
     {
       id: 1,
       name: "GNC - Gay & Cranky",
       price: "$20",
       image: "/images/GNCS.png",
       sizeToVariantId: {
-        XS: "685c13aae55b79",
-        S: "685c13aae55b80",
-        M: "685c13aae55b81",
-        L: "685c13aae55b82",
-        XL: "685c13aae55b83",
-        XXL: "685c13aae55b84"
+        S: "1974",
+        M: "1975",
+        L: "1976",
+        XL: "1977",
+        "2XL": "1978"
       }
     },
     {
@@ -65,12 +65,11 @@ const Index = () => {
       price: "$20",
       image: "/images/ThisShirtIsGayS.png",
       sizeToVariantId: {
-        XS: "685c109caeacd4",
-        S: "685c109caeacd5",
-        M: "685c109caeacd6",
-        L: "685c109caeacd7",
-        XL: "685c109caeacd8",
-        XXL: "685c109caeacd9"
+        S: "1974",
+        M: "1975",
+        L: "1976",
+        XL: "1977",
+        "2XL": "1978"
       }
     },
     {
@@ -79,12 +78,11 @@ const Index = () => {
       price: "$20",
       image: "/images/supremeS.png",
       sizeToVariantId: {
-        XS: "685c1355135477",
-        S: "685c1355135478",
-        M: "685c1355135479",
-        L: "685c1355135480",
-        XL: "685c1355135481",
-        XXL: "685c1355135482"
+        S: "1974",
+        M: "1975",
+        L: "1976",
+        XL: "1977",
+        "2XL": "1978"
       }
     },   
     {
@@ -93,12 +91,11 @@ const Index = () => {
       price: "$20",
       image: "/images/SlayNowCryLaterS.png",
       sizeToVariantId: {
-        XS: "685c1218762068",
-        S: "685c1218762069",
-        M: "685c1218762070",
-        L: "685c1218762071",
-        XL: "685c1218762072",
-        XXL: "685c1218762073"
+        S: "1974",
+        M: "1975",
+        L: "1976",
+        XL: "1977",
+        "2XL": "1978"
       }
     },
     {
@@ -107,12 +104,11 @@ const Index = () => {
       price: "$20",
       image: "/images/TheHomeDepotS.png",
       sizeToVariantId: {
-        XS: "685c13ded186b6",
-        S: "685c13ded186b7",
-        M: "685c13ded186b8",
-        L: "685c13ded186b9",
-        XL: "685c13ded186ba",
-        XXL: "685c13ded186bb"
+        S: "1974",
+        M: "1975",
+        L: "1976",
+        XL: "1977",
+        "2XL": "1978"
       }
     },
     {
@@ -121,12 +117,11 @@ const Index = () => {
       price: "$20",
       image: "/images/AirFryerS.png",
       sizeToVariantId: {
-        XS: "685c140faf8594",
-        S: "685c140faf8595",
-        M: "685c140faf8596",
-        L: "685c140faf8597",
-        XL: "685c140faf8598",
-        XXL: "685c140faf8599"
+        S: "1974",
+        M: "1975",
+        L: "1976",
+        XL: "1977",
+        "2XL": "1978"
       }
     },
     {
@@ -135,12 +130,11 @@ const Index = () => {
       price: "$20",
       image: "/images/Dept-GayAffairsS.png",
       sizeToVariantId: {
-        XS: "685c143193f7d8",
-        S: "685c143193f7d9",
-        M: "685c143193f7da",
-        L: "685c143193f7db",
-        XL: "685c143193f7dc",
-        XXL: "685c143193f7dd"
+        S: "1974",
+        M: "1975",
+        L: "1976",
+        XL: "1977",
+        "2XL": "1978"
       }
     },
     {
@@ -149,12 +143,11 @@ const Index = () => {
       price: "$20",
       image: "/images/gay-tm.png",
       sizeToVariantId: {
-        XS: "685c14cdc433f6",
-        S: "685c14cdc433f7",
-        M: "685c14cdc433f8",
-        L: "685c14cdc433f9",
-        XL: "685c14cdc433fa",
-        XXL: "685c14cdc433fb"
+        S: "1974",
+        M: "1975",
+        L: "1976",
+        XL: "1977",
+        "2XL": "1978"
       }
     },
     {
@@ -163,12 +156,11 @@ const Index = () => {
       price: "$20",
       image: "/images/SpreadLoveLikeGlitterS.png",
       sizeToVariantId: {
-        XS: "685d84ea823033",
-        S: "685d84ea823034",
-        M: "685d84ea823035",
-        L: "685d84ea823036",
-        XL: "685d84ea823037",
-        XXL: "685d84ea823038"
+        S: "1974",
+        M: "1975",
+        L: "1976",
+        XL: "1977",
+        "2XL": "1978"
       }
     },
     {
@@ -177,12 +169,11 @@ const Index = () => {
       price: "$20",
       image: "/images/ICameOutForThisS.png",
       sizeToVariantId: {
-        XS: "685d7287b13a49",
-        S: "685d7287b13a50",
-        M: "685d7287b13a51",
-        L: "685d7287b13a52",
-        XL: "685d7287b13a53",
-        XXL: "685d7287b13a54"
+        S: "1974",
+        M: "1975",
+        L: "1976",
+        XL: "1977",
+        "2XL": "1978"
       }
     },
     {
@@ -191,12 +182,11 @@ const Index = () => {
       price: "$20",
       image: "/images/AmazonPrideS.png",
       sizeToVariantId: {
-        XS: "685c145a154a44",
-        S: "685c145a154a45",
-        M: "685c145a154a46",
-        L: "685c145a154a47",
-        XL: "685c145a154a48",
-        XXL: "685c145a154a49"
+        S: "1974",
+        M: "1975",
+        L: "1976",
+        XL: "1977",
+        "2XL": "1978"
       }
     },
     {
@@ -205,12 +195,11 @@ const Index = () => {
       price: "$20",
       image: "/images/GaytoradeS.png",
       sizeToVariantId: {
-        XS: "685d777c5ffc86",
-        S: "685d777c5ffc87",
-        M: "685d777c5ffc88",
-        L: "685d777c5ffc89",
-        XL: "685d777c5ffc90",
-        XXL: "685d777c5ffc91"
+        S: "1974",
+        M: "1975",
+        L: "1976",
+        XL: "1977",
+        "2XL": "1978"
       }
     }
   ];
