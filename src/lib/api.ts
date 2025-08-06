@@ -43,6 +43,15 @@ export const apiRequest = async (endpoint: string, options: RequestInit = {}) =>
   try {
     const response = await fetch(url, config);
     
+    // Check if response is HTML (indicating an error page)
+    const contentType = response.headers.get('content-type');
+    if (contentType && contentType.includes('text/html')) {
+      console.error(`API returned HTML instead of JSON. This usually means the endpoint doesn't exist.`);
+      console.error(`URL: ${url}`);
+      console.error(`Content-Type: ${contentType}`);
+      throw new Error(`API endpoint not found: ${url}`);
+    }
+    
     if (!response.ok) {
       const errorText = await response.text();
       console.error(`API request failed: ${response.status} ${response.statusText}`, errorText);
