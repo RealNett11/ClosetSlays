@@ -171,26 +171,35 @@ function EnhancedStripeCheckoutForm({
   }) => {
     if (!addressData || !cartItems.length) return;
     
+    console.log('updateShippingCost called with:', addressData);
+    
     setIsUpdatingShipping(true);
     try {
       // Extract PaymentIntent ID from client secret
       const paymentIntentId = clientSecret.split('_secret_')[0];
       
+      // Build address object with better international support
+      const shippingAddress = {
+        name: addressData.name || 'Customer',
+        line1: addressData.address?.line1 || addressData.line1 || '',
+        line2: addressData.address?.line2 || addressData.line2 || '',
+        city: addressData.address?.city || addressData.city || '',
+        state: addressData.address?.state || addressData.state || '',
+        postal_code: addressData.address?.postal_code || addressData.postal_code || '',
+        country: addressData.address?.country || addressData.country || 'US',
+      };
+      
+      console.log('Sending shipping address to API:', shippingAddress);
+      
       const data = await updatePaymentIntent(
         paymentIntentId,
-        {
-          name: addressData.name || 'Customer',
-          line1: addressData.address?.line1 || addressData.line1,
-          line2: addressData.address?.line2 || addressData.line2 || '',
-          city: addressData.address?.city || addressData.city,
-          state: addressData.address?.state || addressData.state,
-          postal_code: addressData.address?.postal_code || addressData.postal_code,
-          country: addressData.address?.country || addressData.country || 'US',
-        },
+        shippingAddress,
         cartItems,
         selectedShippingOption,
         selectedShippingOption === 'express' ? phoneNumber : undefined
       );
+      
+      console.log('Shipping update response:', data);
       
       setShippingCost(data.shippingCost);
       if (data.shippingOptions) {
@@ -397,18 +406,34 @@ function EnhancedStripeCheckoutForm({
                   } : {
                     mode: 'automatic',
                   },
-                  allowedCountries: ['US', 'CA'],
+                  // Explicitly allow all major countries for international shipping
+                  allowedCountries: [
+                    'US', 'CA', 'GB', 'AU', 'DE', 'FR', 'IT', 'ES', 'NL', 'SE', 'NO', 'DK', 'FI',
+                    'CH', 'AT', 'BE', 'IE', 'PT', 'LU', 'JP', 'SG', 'HK', 'NZ', 'MX', 'BR', 'IN'
+                  ],
                   display: {
                     name: 'full',
                   },
                   defaultValues: addressData || {},
                 }}
                 onChange={(event) => {
+                  console.log('AddressElement onChange:', event); // Debug logging
                   if (event.complete) {
                     setAddressComplete(true);
                     // Update shipping cost when address is complete
                     if (event.value && cartItems.length > 0) {
+                      console.log('Triggering shipping update with address:', event.value);
                       updateShippingCost(event.value);
+                    }
+                  } else {
+                    // Also trigger updates for partial but valid addresses for international
+                    if (event.value && event.value.address && cartItems.length > 0) {
+                      const addr = event.value.address;
+                      // Check if we have minimum required fields for shipping calculation
+                      if (addr.country && addr.city && (addr.postal_code || addr.country !== 'US')) {
+                        console.log('Triggering shipping update with partial international address:', event.value);
+                        updateShippingCost(event.value);
+                      }
                     }
                   }
                 }}
