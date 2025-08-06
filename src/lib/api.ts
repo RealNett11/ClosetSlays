@@ -30,10 +30,13 @@ export const apiRequest = async (endpoint: string, options: RequestInit = {}) =>
   
   const defaultHeaders = {
     'Content-Type': 'application/json',
+    'Accept': 'application/json',
   };
 
   const config: RequestInit = {
     ...options,
+    mode: 'cors', // Explicitly set CORS mode
+    credentials: 'include', // Include credentials for CORS
     headers: {
       ...defaultHeaders,
       ...options.headers,
@@ -61,6 +64,18 @@ export const apiRequest = async (endpoint: string, options: RequestInit = {}) =>
     return response;
   } catch (error) {
     console.error(`API request error for ${url}:`, error);
+    
+    // Check if this is a CORS error
+    if (error instanceof TypeError && error.message === 'Failed to fetch') {
+      console.error('This appears to be a CORS error. The server may not be properly configured for cross-origin requests.');
+      console.error('Check that the backend server:');
+      console.error('1. Is running and accessible');
+      console.error('2. Has CORS middleware properly configured');
+      console.error('3. Includes the frontend domain in allowed origins');
+      
+      throw new Error(`CORS Error: Unable to connect to ${url}. The server may not be properly configured for cross-origin requests.`);
+    }
+    
     throw error;
   }
 };
