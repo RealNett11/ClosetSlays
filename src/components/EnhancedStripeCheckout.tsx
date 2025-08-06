@@ -171,7 +171,7 @@ function EnhancedStripeCheckoutForm({
   }) => {
     if (!addressData || !cartItems.length) return;
     
-    console.log('updateShippingCost called with:', addressData);
+    // console.log('updateShippingCost called with:', addressData);
     
     setIsUpdatingShipping(true);
     try {
@@ -189,7 +189,7 @@ function EnhancedStripeCheckoutForm({
         country: addressData.address?.country || addressData.country || 'US',
       };
       
-      console.log('Sending shipping address to API:', shippingAddress);
+      // console.log('Sending shipping address to API:', shippingAddress);
       
       const data = await updatePaymentIntent(
         paymentIntentId,
@@ -199,14 +199,14 @@ function EnhancedStripeCheckoutForm({
         selectedShippingOption === 'express' ? phoneNumber : undefined
       );
       
-      console.log('Shipping update response:', data);
+      // console.log('Shipping update response:', data);
       
       setShippingCost(data.shippingCost);
       if (data.shippingOptions) {
         setShippingOptions(data.shippingOptions);
       }
       onShippingUpdate?.(data.shippingCost);
-      console.log('Shipping updated:', data.shippingCost);
+      // console.log('Shipping updated:', data.shippingCost);
     } catch (err) {
       console.error('Shipping update error:', err);
     } finally {
@@ -247,7 +247,7 @@ function EnhancedStripeCheckoutForm({
           
           setShippingCost(data.shippingCost);
           onShippingUpdate?.(data.shippingCost);
-          console.log('Shipping updated for option:', optionId, 'Cost:', data.shippingCost);
+          // console.log('Shipping updated for option:', optionId, 'Cost:', data.shippingCost);
         } catch (err) {
           console.error('Shipping update error:', err);
         } finally {
@@ -417,12 +417,12 @@ function EnhancedStripeCheckoutForm({
                   defaultValues: addressData || {},
                 }}
                 onChange={(event) => {
-                  console.log('AddressElement onChange:', event); // Debug logging
+                  // console.log('AddressElement onChange:', event); // Debug logging
                   if (event.complete) {
                     setAddressComplete(true);
                     // Update shipping cost when address is complete
                     if (event.value && cartItems.length > 0) {
-                      console.log('Triggering shipping update with address:', event.value);
+                      // console.log('Triggering shipping update with address:', event.value);
                       updateShippingCost(event.value);
                     }
                   } else {
@@ -431,7 +431,7 @@ function EnhancedStripeCheckoutForm({
                       const addr = event.value.address;
                       // Check if we have minimum required fields for shipping calculation
                       if (addr.country && addr.city && (addr.postal_code || addr.country !== 'US')) {
-                        console.log('Triggering shipping update with partial international address:', event.value);
+                        // console.log('Triggering shipping update with partial international address:', event.value);
                         updateShippingCost(event.value);
                       }
                     }

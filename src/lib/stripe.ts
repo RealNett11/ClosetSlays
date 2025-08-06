@@ -5,10 +5,12 @@ import { loadStripe } from '@stripe/stripe-js';
 const publishableKey = import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY || '';
 const stripeMode = import.meta.env.VITE_STRIPE_MODE || 'test';
 
-// Log environment info (but not the key itself)
-console.log(`Stripe environment: ${stripeMode}`);
-console.log(`Build mode: ${import.meta.env.MODE}`);
-console.log(`API URL: ${import.meta.env.VITE_API_BASE_URL || 'not set'}`);
+// Log environment info (but not the key itself) - only in development
+if (import.meta.env.MODE === 'development') {
+  console.log(`Stripe environment: ${stripeMode}`);
+  console.log(`Build mode: ${import.meta.env.MODE}`);
+  console.log(`API URL: ${import.meta.env.VITE_API_BASE_URL || 'not set'}`);
+}
 
 // Validate the key matches the mode
 const validateStripeKey = () => {
@@ -35,7 +37,11 @@ const validateStripeKey = () => {
 
 // Initialize Stripe
 const isValid = validateStripeKey();
-console.log(`Stripe configuration is ${isValid ? 'valid' : 'INVALID'} (Mode: ${stripeMode})`);
+
+// Only log configuration status in development
+if (import.meta.env.MODE === 'development') {
+  console.log(`Stripe configuration is ${isValid ? 'valid' : 'INVALID'} (Mode: ${stripeMode})`);
+}
 
 // Export the Stripe instance
 export const stripePromise = loadStripe(publishableKey);

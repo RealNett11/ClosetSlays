@@ -6,7 +6,7 @@ const getApiBaseUrl = (): string => {
   const envApiUrl = import.meta.env.VITE_API_BASE_URL;
   
   if (envApiUrl) {
-    console.log('Using API URL from environment:', envApiUrl);
+    // console.log('Using API URL from environment:', envApiUrl);
     return envApiUrl;
   }
   
@@ -15,7 +15,7 @@ const getApiBaseUrl = (): string => {
     ? 'https://webhook.closetslays.com' 
     : 'http://localhost:3001';
   
-  console.log('Using fallback API URL:', fallbackUrl);
+  // console.log('Using fallback API URL:', fallbackUrl);
   return fallbackUrl;
 };
 
@@ -26,7 +26,7 @@ const API_BASE_URL = getApiBaseUrl();
 export const apiRequest = async (endpoint: string, options: RequestInit = {}) => {
   const url = `${API_BASE_URL}${endpoint}`;
   
-  console.log(`Making API request to: ${url}`);
+  // console.log(`Making API request to: ${url}`);
   
   const defaultHeaders = {
     'Content-Type': 'application/json',
