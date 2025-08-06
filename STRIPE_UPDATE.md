@@ -1,6 +1,3 @@
-# ClosetSlays Frontend - Updated Stripe Configuration
-
-This update ensures the frontend uses the correct LIVE Stripe publishable key from GitHub secrets.
 
 ## Recent Changes
 - Updated GitHub secret `VITE_STRIPE_PUBLISHABLE_KEY` with LIVE key

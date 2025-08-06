@@ -1,12 +1,10 @@
 import { useCart } from './CartContext';
 import { useNavigate } from 'react-router-dom';
-import { loadStripe } from '@stripe/stripe-js';
+import { stripePromise } from '../lib/stripe';
 
 interface CartProps {
   onClose: () => void;
 }
-
-const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY || '');
 
 export const Cart: React.FC<CartProps> = ({ onClose }) => {
   const {

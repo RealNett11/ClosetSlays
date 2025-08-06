@@ -6,11 +6,9 @@ import {
   useStripe,
   useElements,
 } from '@stripe/react-stripe-js';
-import { loadStripe, type StripeElementsOptions } from '@stripe/stripe-js';
+import { type StripeElementsOptions } from '@stripe/stripe-js';
 import { updatePaymentIntent, getShippingOptions } from '../lib/api';
-
-// Initialize Stripe with publishable key
-const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY || '');
+import { stripePromise } from '../lib/stripe';
 
 // Enhanced Stripe theme with modern, minimalist design
 const createCustomTheme = (brandColor: string) => ({
