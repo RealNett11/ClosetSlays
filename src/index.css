@@ -356,6 +356,21 @@
   }
 }
 
+/* Stripe Payment Button Rainbow Hover Effect */
+.stripe-payment-button:not(:disabled):hover {
+  background-image: linear-gradient(
+    to right,
+    #ff0000, #ff3e00, #ff7f00, #ffbf00, #ffff00, 
+    #80ff00, #00ff00, #00ff80, #00ffff, #0080ff, 
+    #0000ff, #8000ff, #9400d3, #ff00ff, 
+    #ff0080, #ff0000
+  ) !important;
+  background-size: 300% 100% !important;
+  animation: rainbow-gradient 8s linear infinite !important;
+  color: black !important;
+  border: 2px solid black !important;
+}
+
 /* iPhone white space fix - added at the very end */
 html, body {
   min-height: 100%;

@@ -5,7 +5,6 @@ import ReactConfetti from 'react-confetti';
 
 const Success = () => {
   const [searchParams] = useSearchParams();
-  const sessionId = searchParams.get('session_id');
   const [orderStatus, setOrderStatus] = useState<'loading' | 'success' | 'error'>('loading');
   const [windowDimensions, setWindowDimensions] = useState({ width: window.innerWidth, height: window.innerHeight });
   const [showConfetti, setShowConfetti] = useState(false);
@@ -27,28 +26,21 @@ const Success = () => {
   const { clearCart } = useCart();
   
   useEffect(() => {
-    // Log the URL parameters for debugging
-    console.log('URL search params:', Object.fromEntries(searchParams.entries()));
-    console.log('Session ID from URL:', sessionId);
+    clearCart();
+    // Set success status and show confetti immediately
+    setOrderStatus('success');
+    setShowConfetti(true);
     
-    // Always show success page even if session_id is missing
-    // This is because Stripe sometimes doesn't include the session_id in the redirect
+    // Stop confetti after 5 seconds
     const timer = setTimeout(() => {
-      setOrderStatus('success');
-      setShowConfetti(true);
-      
-      // Clear the cart on successful order
-      clearCart();
-      
-      // Hide confetti after 8 seconds
-      setTimeout(() => setShowConfetti(false), 8000);
-    }, 1000);
+      setShowConfetti(false);
+    }, 5000);
     
     return () => clearTimeout(timer);
-  }, [searchParams, sessionId, clearCart]);
+  }, [clearCart]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-red-200 via-pink-200 via-purple-200 via-blue-200 via-indigo-200 to-violet-200 flex items-center justify-center">
+    <div className="min-h-screen bg-gradient-to-br from-red-200 via-purple-200 to-violet-200 flex items-center justify-center">
       {showConfetti && (
         <ReactConfetti
           width={windowDimensions.width}
@@ -77,9 +69,9 @@ const Success = () => {
             <p className="text-lg text-gray-600 mb-6">
               Your order has been successfully placed. We'll send you a confirmation email shortly.
             </p>
-            <p className="text-sm text-gray-500 mb-6">
-              Order ID: {sessionId?.substring(0, 8)}...
-            </p>
+                        <p className="text-sm text-gray-500 mb-6">
+                            {/* No order ID for embedded checkout */}
+                        </p>
             <Link 
               to="/" 
               className="add-to-cart-button py-3 px-6 text-lg font-bold inline-block"

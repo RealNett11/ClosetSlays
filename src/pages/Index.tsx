@@ -1,5 +1,5 @@
 import { ShirtCard } from "@/components/ShirtCard";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useCart } from '@/components/CartContext';
 import { Cart } from '@/components/Cart';
 import { useState, useEffect, useRef } from 'react';
@@ -43,6 +43,7 @@ const CartButton = ({ onClick }: { onClick: () => void }) => {
 
 const Index = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const navigate = useNavigate();
   // Each shirt now has a sizeToVariantId mapping for Printful compliance
   const shirts = [
     // All shirts use the same Printful variant IDs for S, M, L, XL, 2XL
@@ -248,44 +249,59 @@ const Index = () => {
           </p>
         </div>
 
+        {/* About Us button above payment logos */}
+        <div className="w-full flex items-center justify-center mb-2">
+          <Link 
+            to="/about" 
+            className="mx-2 md:mx-4 inline-block add-to-cart-button text-white bg-black font-semibold py-2 md:py-4 px-4 md:px-8 rounded-full transition-all duration-200 transform hover:scale-105 shadow hover:shadow-md text-sm md:text-base"
+          >
+            About Us
+          </Link>
+        </div>
         {/* Payment section with adjusted mobile heights */}
         <div className="w-full flex items-center justify-center overflow-x-auto py-2 md:py-0 mb-8 no-scrollbar">
-          <div className="flex items-center justify-center min-w-max gap-2 md:gap-4 px-4">
+          <div className="grid grid-cols-3 md:flex md:flex-row items-center justify-center min-w-max gap-2 md:gap-4 px-4 w-full max-w-xs md:max-w-none mx-auto">
             <img 
               src="/images/Visa-Payment-Card.png" 
               alt="Visa" 
-              className="h-[50px] md:h-[71px] w-14 md:w-[100px] object-contain" 
+              className="h-[38px] md:h-[71px] w-14 md:w-[100px] object-contain mx-auto" 
             />
             <img 
               src="/images/mastercard-payment.png" 
               alt="Mastercard" 
-              className="h-[38px] md:h-[71px] w-14 md:w-[100px] object-contain md:scale-75" 
+              className="h-[38px] md:h-[71px] w-14 md:w-[100px] object-contain md:scale-75 mx-auto" 
             />
-            <Link 
-              to="/about" 
-              className="mx-2 md:mx-4 inline-block add-to-cart-button text-white bg-black font-semibold py-2 md:py-4 px-4 md:px-8 rounded-full transition-all duration-200 transform hover:scale-105 shadow hover:shadow-md text-sm md:text-base"
-            >
-              About Us
-            </Link>
             <img 
               src="/images/AmericanEX-Payment.png" 
               alt="American Express" 
-              className="h-[50px] md:h-[57px] w-14 md:w-[100px] object-contain" 
+              className="h-[38px] md:h-[57px] w-14 md:w-[100px] object-contain mx-auto" 
             />
-            <img 
-              src="/images/stripe Icon.png" 
-              alt="Stripe" 
-              className="h-9 md:h-[54px] w-14 md:w-[100px] object-contain" 
+            {/* Discover Logo */}
+            <img
+              src="/images/discover.png"
+              alt="Discover"
+              className="h-[32px] md:h-[40px] w-auto object-contain mx-auto scale-125"
+            />
+            {/* Apple Pay Logo */}
+            <img
+              src="/images/applepay.png"
+              alt="Apple Pay"
+              className="h-[32px] md:h-[40px] w-auto object-contain mx-auto scale-125"
+            />
+            {/* Google Pay Logo */}
+            <img
+              src="/images/googlepay.png"
+              alt="Google Pay"
+              className="h-[32px] md:h-[40px] w-auto object-contain mx-auto"
             />
           </div>
         </div>
       </div>
 
+
       {isCartOpen && <Cart onClose={() => setIsCartOpen(false)} />}
     </div>
-
   );
-
 };
 
 export default Index;

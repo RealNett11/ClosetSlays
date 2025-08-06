@@ -1,8 +1,10 @@
 import { useState, useEffect, useRef } from 'react';
+import { useLocation } from 'react-router-dom';
 import { useCart } from './CartContext';
 import { Cart } from './Cart';
 
 export function StickyCartButton() {
+  const location = useLocation();
   const [showCart, setShowCart] = useState(false);
   const { totalItems } = useCart();
   const prevItemsRef = useRef(totalItems);
@@ -17,6 +19,9 @@ export function StickyCartButton() {
     }
     prevItemsRef.current = totalItems;
   }, [totalItems]);
+
+  // Only show on home page
+  if (location.pathname !== '/') return null;
 
   return (
     <>

@@ -1,6 +1,5 @@
 import { useCart } from './CartContext';
-import { stripePromise, getStripeApiUrl, isCheckoutSessionId } from '../lib/stripe';
-import { handleStripeError, isDirectStripeApiCall } from '../lib/errorHandling';
+import { useNavigate } from 'react-router-dom';
 
 interface CartProps {
   onClose: () => void;
@@ -15,122 +14,11 @@ export const Cart: React.FC<CartProps> = ({ onClose }) => {
     totalItems,
     totalPrice,
   } = useCart();
+  const navigate = useNavigate();
 
-  const handleCheckout = async () => {
-    try {
-      const stripe = await stripePromise;
-      
-      if (!stripe) {
-        throw new Error('Stripe failed to initialize');
-      }
-
-      // Use the appropriate backend URL from our utility
-      const backendUrl = getStripeApiUrl();
-        
-      // Check if we're accidentally trying to use the Stripe API directly
-      if (isDirectStripeApiCall(backendUrl)) {
-        console.error('ERROR: Attempting to use Stripe API directly instead of webhook URL');
-        alert('Configuration error: Using direct Stripe API instead of webhook URL');
-        return;
-      }
-        
-      console.log(`Checkout initiated in ${import.meta.env.MODE} mode`);
-      console.log(`Using backend URL: ${backendUrl}`);
-        
-      // Log the Stripe mode being used to help with debugging
-      const stripeMode = import.meta.env.VITE_STRIPE_MODE || 'test';
-      console.log(`Using Stripe mode: ${stripeMode}`);
-      
-      const response = await fetch(backendUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-Stripe-Mode': stripeMode, // Add as header for more visibility
-        },
-        body: JSON.stringify({
-          items: cartItems.map(item => ({
-            id: item.id,
-            name: item.name,
-            price: parseFloat(item.price.replace('$', '')),
-            quantity: item.quantity,
-            size: item.size,
-            printful_variant_id: item.printful_variant_id || ''
-          })),
-          mode: stripeMode // Explicitly use the Stripe mode from env vars
-        }),
-      });
-
-      if (!response.ok) {
-        const errorText = await response.text();
-        console.error('Checkout API error:', {
-          status: response.status,
-          statusText: response.statusText,
-          errorText
-        });
-        alert('Checkout failed. Please try again later.');
-        throw new Error(`Network response was not ok: ${response.status} ${response.statusText}`);
-      }
-
-      const session = await response.json();
-      
-      // Log the session details to help with debugging (excluding sensitive data)
-      console.log('Checkout session created:', { 
-        id: session.id ? session.id.substring(0, 5) + '...' : 'undefined',
-        mode: session.mode || 'unknown',
-        url: session.url ? 'Present' : 'Missing'
-      });
-      
-      // Check if we received a session ID that looks like a Checkout Session ID
-      // but we're trying to use it directly with the Stripe API
-      if (session.id && isCheckoutSessionId(session.id) && !session.url) {
-        console.warn('Received a Checkout Session ID but no URL. This might cause a 401 error if used directly with the Stripe API.');
-      }
-      
-      // Check if we have a direct URL to redirect to (preferred method)
-      if (session.url) {
-        // Use the URL provided by the backend to redirect to Stripe Checkout
-        window.location.href = session.url;
-        return;
-      }
-      
-      // If we only have a session ID but no URL, we need to use redirectToCheckout
-      // This should only happen if your backend isn't returning the complete session object
-      if (session.id) {
-        console.log('Using redirectToCheckout with session ID:', session.id.substring(0, 5) + '...');
-        
-        // Make sure we're not trying to use a session ID directly with the Stripe API
-        if (isCheckoutSessionId(session.id)) {
-          // This is the correct way to redirect to Checkout with a session ID
-          const result = await stripe.redirectToCheckout({
-            sessionId: session.id,
-          });
-
-          if (result.error) {
-            console.error('Stripe redirectToCheckout error:', result.error);
-            alert('Checkout failed: ' + result.error.message);
-          }
-        } else {
-          console.error('Invalid session ID format received from server');
-          alert('Checkout failed: Invalid session format');
-        }
-      } else {
-        throw new Error('No session ID or URL returned from the server');
-      }
-    } catch (error) {
-      console.error('Checkout error:', error);
-      
-      // Use our error handling utility
-      if (error instanceof Error) {
-        try {
-          handleStripeError(error);
-        } catch (handledError) {
-          // If the error wasn't handled by our utility, show a generic message
-          alert('An error occurred during checkout. Please try again later.');
-        }
-      } else {
-        alert('An unexpected error occurred during checkout.');
-      }
-    }
+  const handleCheckout = () => {
+    onClose();
+    navigate('/checkout');
   };
 
   return (
