@@ -7,6 +7,7 @@ import {
   useElements,
 } from '@stripe/react-stripe-js';
 import { loadStripe, type StripeElementsOptions } from '@stripe/stripe-js';
+import { updatePaymentIntent, getShippingOptions } from '../lib/api';
 
 // Initialize Stripe with publishable key
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY || '');
@@ -175,37 +176,28 @@ function EnhancedStripeCheckoutForm({
       // Extract PaymentIntent ID from client secret
       const paymentIntentId = clientSecret.split('_secret_')[0];
       
-      const response = await fetch('/api/update-payment-intent', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          paymentIntentId,
-          address: {
-            name: addressData.name || 'Customer',
-            line1: addressData.address?.line1 || addressData.line1,
-            line2: addressData.address?.line2 || addressData.line2 || '',
-            city: addressData.address?.city || addressData.city,
-            state: addressData.address?.state || addressData.state,
-            postal_code: addressData.address?.postal_code || addressData.postal_code,
-            country: addressData.address?.country || addressData.country || 'US',
-          },
-          items: cartItems,
-          shippingOption: selectedShippingOption,
-          phoneNumber: selectedShippingOption === 'express' ? phoneNumber : undefined,
-        }),
-      });
+      const data = await updatePaymentIntent(
+        paymentIntentId,
+        {
+          name: addressData.name || 'Customer',
+          line1: addressData.address?.line1 || addressData.line1,
+          line2: addressData.address?.line2 || addressData.line2 || '',
+          city: addressData.address?.city || addressData.city,
+          state: addressData.address?.state || addressData.state,
+          postal_code: addressData.address?.postal_code || addressData.postal_code,
+          country: addressData.address?.country || addressData.country || 'US',
+        },
+        cartItems,
+        selectedShippingOption,
+        selectedShippingOption === 'express' ? phoneNumber : undefined
+      );
       
-      const data = await response.json();
-      if (response.ok) {
-        setShippingCost(data.shippingCost);
-        if (data.shippingOptions) {
-          setShippingOptions(data.shippingOptions);
-        }
-        onShippingUpdate?.(data.shippingCost);
-        console.log('Shipping updated:', data.shippingCost);
-      } else {
-        console.error('Failed to update shipping:', data.error);
+      setShippingCost(data.shippingCost);
+      if (data.shippingOptions) {
+        setShippingOptions(data.shippingOptions);
       }
+      onShippingUpdate?.(data.shippingCost);
+      console.log('Shipping updated:', data.shippingCost);
     } catch (err) {
       console.error('Shipping update error:', err);
     } finally {
@@ -228,34 +220,25 @@ function EnhancedStripeCheckoutForm({
           // Extract PaymentIntent ID from client secret
           const paymentIntentId = clientSecret.split('_secret_')[0];
           
-          const response = await fetch('/api/update-payment-intent', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              paymentIntentId,
-              address: {
-                name: addressValue.value.name || 'Customer',
-                line1: addressValue.value.address?.line1 || '',
-                line2: addressValue.value.address?.line2 || '',
-                city: addressValue.value.address?.city || '',
-                state: addressValue.value.address?.state || '',
-                postal_code: addressValue.value.address?.postal_code || '',
-                country: addressValue.value.address?.country || 'US',
-              },
-              items: cartItems,
-              shippingOption: optionId, // Use the newly selected option
-              phoneNumber: optionId === 'express' ? phoneNumber : undefined,
-            }),
-          });
+          const data = await updatePaymentIntent(
+            paymentIntentId,
+            {
+              name: addressValue.value.name || 'Customer',
+              line1: addressValue.value.address?.line1 || '',
+              line2: addressValue.value.address?.line2 || '',
+              city: addressValue.value.address?.city || '',
+              state: addressValue.value.address?.state || '',
+              postal_code: addressValue.value.address?.postal_code || '',
+              country: addressValue.value.address?.country || 'US',
+            },
+            cartItems,
+            optionId, // Use the newly selected option
+            optionId === 'express' ? phoneNumber : undefined
+          );
           
-          const data = await response.json();
-          if (response.ok) {
-            setShippingCost(data.shippingCost);
-            onShippingUpdate?.(data.shippingCost);
-            console.log('Shipping updated for option:', optionId, 'Cost:', data.shippingCost);
-          } else {
-            console.error('Failed to update shipping:', data.error);
-          }
+          setShippingCost(data.shippingCost);
+          onShippingUpdate?.(data.shippingCost);
+          console.log('Shipping updated for option:', optionId, 'Cost:', data.shippingCost);
         } catch (err) {
           console.error('Shipping update error:', err);
         } finally {
@@ -614,7 +597,7 @@ function EnhancedStripeCheckoutForm({
               <svg className="w-5 h-5 group-hover:rotate-12 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
               </svg>
-              <span className="text-black !text-black">Complete Secure Payment</span>
+              <span className="text-black">Complete Secure Payment</span>
             </div>
           )}
         </button>
