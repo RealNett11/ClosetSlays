@@ -36,7 +36,7 @@ export const apiRequest = async (endpoint: string, options: RequestInit = {}) =>
   const config: RequestInit = {
     ...options,
     mode: 'cors', // Explicitly set CORS mode
-    credentials: 'include', // Include credentials for CORS
+    credentials: 'omit', // Try without credentials first to isolate CORS issues
     headers: {
       ...defaultHeaders,
       ...options.headers,
