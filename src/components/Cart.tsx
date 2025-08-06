@@ -25,37 +25,30 @@ export const Cart: React.FC<CartProps> = ({ onClose }) => {
         throw new Error('Stripe failed to initialize');
       }
 
-      const response = await fetch('/api/create-checkout-session', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          items: cartItems.map(item => ({
-            id: item.id,
-            name: item.name,
-            price: parseFloat(item.price.replace('$', '')),
-            quantity: item.quantity,
-            size: item.size,
-          })),
-        }),
-      });
-
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-
-      const session = await response.json();
+      // Use the correct API endpoint and import the API function
+      const { createPaymentIntent } = await import('../lib/api');
       
-      const result = await stripe.redirectToCheckout({
-        sessionId: session.id,
-      });
+      const response = await createPaymentIntent(
+        cartItems.map(item => ({
+          id: item.id,
+          name: item.name,
+          price: parseFloat(item.price.replace('$', '')),
+          quantity: item.quantity,
+          size: item.size,
+        }))
+      );
 
-      if (result.error) {
-        console.error(result.error);
+      if (!response.clientSecret) {
+        throw new Error('Failed to create payment intent');
       }
+
+      // For now, redirect to checkout page with the client secret
+      // In a full implementation, you'd use Stripe Elements here
+      window.location.href = `/checkout?payment_intent_client_secret=${response.clientSecret}`;
+      
     } catch (error) {
       console.error('Checkout error:', error);
+      alert('An error occurred during checkout. Please try again.');
     }
   };
 
