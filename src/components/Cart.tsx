@@ -1,4 +1,5 @@
 import { useCart } from './CartContext';
+import { useNavigate } from 'react-router-dom';
 import { loadStripe } from '@stripe/stripe-js';
 
 interface CartProps {
@@ -16,6 +17,7 @@ export const Cart: React.FC<CartProps> = ({ onClose }) => {
     totalItems,
     totalPrice,
   } = useCart();
+  const navigate = useNavigate();
 
   const handleCheckout = async () => {
     try {
@@ -42,9 +44,9 @@ export const Cart: React.FC<CartProps> = ({ onClose }) => {
         throw new Error('Failed to create payment intent');
       }
 
-      // For now, redirect to checkout page with the client secret
-      // In a full implementation, you'd use Stripe Elements here
-      window.location.href = `/checkout?payment_intent_client_secret=${response.clientSecret}`;
+      // Navigate to checkout page with the client secret using React Router
+      onClose(); // Close the cart modal first
+      navigate(`/checkout?payment_intent_client_secret=${response.clientSecret}`);
       
     } catch (error) {
       console.error('Checkout error:', error);
