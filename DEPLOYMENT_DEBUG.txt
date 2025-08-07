@@ -1,0 +1,3 @@
+DEPLOYMENT_STATUS=INVESTIGATING
+BUILD_TIMESTAMP=$(date)
+ISSUE=GitHub_Actions_not_deploying_main_to_gh-pages
