@@ -23,6 +23,21 @@ jobs:
       - name: Install Dependencies
         run: npm ci
 
+      - name: Verify Environment Variables
+        env:
+          STRIPE_KEY: ${{ secrets.VITE_STRIPE_PUBLISHABLE_KEY }}
+        run: |
+          echo "Verifying Stripe configuration..."
+          if [[ "$STRIPE_KEY" == pk_live_* ]]; then
+            echo "✅ GitHub secret contains LIVE key"
+          elif [[ "$STRIPE_KEY" == pk_test_* ]]; then
+            echo "❌ GitHub secret contains TEST key - THIS IS THE PROBLEM!"
+            exit 1
+          else
+            echo "❌ GitHub secret is empty or invalid format"
+            exit 1
+          fi
+
       - name: Build
         run: npm run build
         env:
