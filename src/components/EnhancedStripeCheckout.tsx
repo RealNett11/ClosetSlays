@@ -138,6 +138,8 @@ function EnhancedStripeCheckoutForm({
   const [selectedShippingOption, setSelectedShippingOption] = useState<string>('standard');
   const [phoneNumber, setPhoneNumber] = useState<string>('');
   const [phoneError, setPhoneError] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
+  const [emailError, setEmailError] = useState<string>('');
 
   useEffect(() => {
     if (!stripe || !clientSecret) return;
@@ -194,7 +196,8 @@ function EnhancedStripeCheckoutForm({
         shippingAddress,
         cartItems,
         selectedShippingOption,
-        selectedShippingOption === 'express' ? phoneNumber : undefined
+        selectedShippingOption === 'express' ? phoneNumber : undefined,
+        email.trim() || undefined
       );
       
       // console.log('Shipping update response:', data);
@@ -240,7 +243,8 @@ function EnhancedStripeCheckoutForm({
             },
             cartItems,
             optionId, // Use the newly selected option
-            optionId === 'express' ? phoneNumber : undefined
+            optionId === 'express' ? phoneNumber : undefined,
+            email.trim() || undefined
           );
           
           setShippingCost(data.shippingCost);
@@ -263,6 +267,13 @@ function EnhancedStripeCheckoutForm({
     return digitsOnly.length >= 10;
   };
 
+  // Function to validate email format
+  const validateEmail = (email: string): boolean => {
+    if (!email.trim()) return true; // Optional email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
@@ -280,6 +291,12 @@ function EnhancedStripeCheckoutForm({
         setPhoneError('Please enter a valid phone number');
         return;
       }
+    }
+
+    // Validate email if provided
+    if (email.trim() && !validateEmail(email)) {
+      setEmailError('Please enter a valid email address');
+      return;
     }
 
     setIsLoading(true);
@@ -540,6 +557,53 @@ function EnhancedStripeCheckoutForm({
                   </div>
                 </div>
               )}
+            </div>
+          </div>
+        )}
+
+        {/* Optional Email Section */}
+        {addressComplete && (
+          <div className="space-y-4">
+            <div className="flex items-center space-x-2 mb-4">
+              <div className="w-8 h-8 rounded-full flex items-center justify-center text-white text-sm font-bold bg-gray-400">
+                📧
+              </div>
+              <h3 className="text-lg font-semibold text-gray-900">Email Confirmation (Optional)</h3>
+            </div>
+            <div className="bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-xl border border-blue-200">
+              <div className="space-y-3">
+                <div className="flex items-start space-x-2">
+                  <svg className="w-4 h-4 text-blue-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                  <div className="flex-1">
+                    <p className="text-sm text-blue-800 font-medium">Get order updates via email</p>
+                    <p className="text-xs text-blue-700 mt-1">We'll send you order confirmation and shipping updates. We don't sell your information or add you to mailing lists.</p>
+                  </div>
+                </div>
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                    setEmailError(''); // Clear error when typing
+                  }}
+                  placeholder="your.email@example.com"
+                  className={`w-full px-4 py-3 border rounded-lg text-sm focus:outline-none focus:ring-2 transition-all duration-200 ${
+                    emailError 
+                      ? 'border-red-300 focus:ring-red-500 focus:border-red-500 bg-red-50' 
+                      : 'border-gray-300 focus:ring-blue-500 focus:border-blue-500 bg-white hover:border-gray-400'
+                  }`}
+                />
+                {emailError && (
+                  <p className="text-xs text-red-600 flex items-center">
+                    <svg className="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    {emailError}
+                  </p>
+                )}
+              </div>
             </div>
           </div>
         )}

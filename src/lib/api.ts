@@ -81,16 +81,16 @@ export const apiRequest = async (endpoint: string, options: RequestInit = {}) =>
 };
 
 // Specific API functions
-export const createPaymentIntent = async (items: any[]) => {
+export const createPaymentIntent = async (items: any[], email?: string) => {
   const response = await apiRequest('/api/create-payment-intent', {
     method: 'POST',
-    body: JSON.stringify({ items }),
+    body: JSON.stringify({ items, email }),
   });
   
   return response.json();
 };
 
-export const updatePaymentIntent = async (paymentIntentId: string, address: any, items: any[], shippingOption: string, phoneNumber?: string) => {
+export const updatePaymentIntent = async (paymentIntentId: string, address: any, items: any[], shippingOption: string, phoneNumber?: string, email?: string) => {
   const response = await apiRequest('/api/update-payment-intent', {
     method: 'POST',
     body: JSON.stringify({
@@ -99,6 +99,7 @@ export const updatePaymentIntent = async (paymentIntentId: string, address: any,
       items,
       shippingOption,
       phoneNumber,
+      email,
     }),
   });
   
