@@ -640,7 +640,7 @@ function EnhancedStripeCheckoutForm({
               <div className="w-8 h-8 rounded-full flex items-center justify-center text-white text-sm font-bold bg-black">
                 2
               </div>
-              <h3 className="text-lg font-semibold text-gray-900">Email Confirmation (Optional)</h3>
+              <h3 className="text-lg font-semibold text-gray-900">Email (Optional)</h3>
             </div>
             <div className="bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-xl border border-blue-200">
               <div className="space-y-3">
@@ -649,8 +649,8 @@ function EnhancedStripeCheckoutForm({
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                   </svg>
                   <div className="flex-1">
-                    <p className="text-sm text-blue-800 font-medium">Get order confirmation</p>
-                    <p className="text-xs text-blue-700 mt-1">We don't sell your information or add you to mailing lists.</p>
+                    <p className="text-sm text-blue-800 font-medium">We recommend providing your email so we can personally notify you about any delays or large orders.</p>
+                    <p className="text-xs text-blue-700 mt-1">We don't sell your information or add you to mailing lists. We will NOT email you automatically.</p>
                   </div>
                 </div>
                 <input
