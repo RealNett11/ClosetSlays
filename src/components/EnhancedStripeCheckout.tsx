@@ -191,10 +191,6 @@ function EnhancedStripeCheckoutForm({
       
       // console.log('Sending shipping address to API:', shippingAddress);
       
-      console.log('EMAIL DEBUGGING - Frontend - updatePaymentIntent call #1 - email value:', email);
-      console.log('EMAIL DEBUGGING - Frontend - updatePaymentIntent call #1 - email.trim():', email.trim());
-      console.log('EMAIL DEBUGGING - Frontend - updatePaymentIntent call #1 - email.trim() || undefined:', email.trim() || undefined);
-      
       const data = await updatePaymentIntent(
         paymentIntentId,
         shippingAddress,
@@ -233,10 +229,6 @@ function EnhancedStripeCheckoutForm({
         try {
           // Extract PaymentIntent ID from client secret
           const paymentIntentId = clientSecret.split('_secret_')[0];
-          
-          console.log('EMAIL DEBUGGING - Frontend - updatePaymentIntent call #2 - email value:', email);
-          console.log('EMAIL DEBUGGING - Frontend - updatePaymentIntent call #2 - email.trim():', email.trim());
-          console.log('EMAIL DEBUGGING - Frontend - updatePaymentIntent call #2 - email.trim() || undefined:', email.trim() || undefined);
           
           const data = await updatePaymentIntent(
             paymentIntentId,
@@ -282,12 +274,40 @@ function EnhancedStripeCheckoutForm({
     return emailRegex.test(email);
   };
 
+  // Function to update payment intent with email only
+  const updatePaymentIntentWithEmail = async (emailValue: string) => {
+    try {
+      const addressElement = elements?.getElement('address');
+      if (addressElement) {
+        const addressValue = await addressElement.getValue();
+        if (addressValue.complete && addressValue.value) {
+          const paymentIntentId = clientSecret.split('_secret_')[0];
+          
+          await updatePaymentIntent(
+            paymentIntentId,
+            {
+              name: addressValue.value.name || 'Customer',
+              line1: addressValue.value.address?.line1 || '',
+              line2: addressValue.value.address?.line2 || '',
+              city: addressValue.value.address?.city || '',
+              state: addressValue.value.address?.state || '',
+              postal_code: addressValue.value.address?.postal_code || '',
+              country: addressValue.value.address?.country || 'US',
+            },
+            cartItems,
+            selectedShippingOption,
+            selectedShippingOption === 'express' ? phoneNumber : undefined,
+            emailValue // Pass the email value
+          );
+        }
+      }
+    } catch (err) {
+      console.error('Error updating payment intent with email:', err);
+    }
+  };
+
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-
-    console.log('EMAIL DEBUGGING - Frontend - handleSubmit called');
-    console.log('EMAIL DEBUGGING - Frontend - email state value:', email);
-    console.log('EMAIL DEBUGGING - Frontend - email after trim:', email.trim());
 
     if (!stripe || !elements) {
       return;
@@ -311,11 +331,41 @@ function EnhancedStripeCheckoutForm({
       return;
     }
 
-    console.log('EMAIL DEBUGGING - Frontend - email validation passed');
-
     setIsLoading(true);
     setError('');
     setPhoneError('');
+
+    // Update payment intent with email before submitting
+    if (email.trim()) {
+      try {
+        const addressElement = elements.getElement('address');
+        if (addressElement) {
+          const addressValue = await addressElement.getValue();
+          if (addressValue.complete && addressValue.value) {
+            const paymentIntentId = clientSecret.split('_secret_')[0];
+            
+            await updatePaymentIntent(
+              paymentIntentId,
+              {
+                name: addressValue.value.name || 'Customer',
+                line1: addressValue.value.address?.line1 || '',
+                line2: addressValue.value.address?.line2 || '',
+                city: addressValue.value.address?.city || '',
+                state: addressValue.value.address?.state || '',
+                postal_code: addressValue.value.address?.postal_code || '',
+                country: addressValue.value.address?.country || 'US',
+              },
+              cartItems,
+              selectedShippingOption,
+              selectedShippingOption === 'express' ? phoneNumber : undefined,
+              email.trim()
+            );
+          }
+        }
+      } catch (err) {
+        console.error('Error updating payment intent with email before confirmation:', err);
+      }
+    }
 
     const { error: submitError } = await elements.submit();
     if (submitError) {
@@ -346,12 +396,7 @@ function EnhancedStripeCheckoutForm({
     // Add email to billing details if provided
     if (email.trim()) {
       billingDetails.email = email.trim();
-      console.log('EMAIL DEBUGGING - Frontend - Added email to billingDetails:', email.trim());
-    } else {
-      console.log('EMAIL DEBUGGING - Frontend - No email provided, not adding to billingDetails');
     }
-    
-    console.log('EMAIL DEBUGGING - Frontend - Final billingDetails:', billingDetails);
     
     if (addressElement && showAddressForm) {
       const addressValue = await addressElement.getValue();
@@ -372,9 +417,6 @@ function EnhancedStripeCheckoutForm({
         // Add email to billing details if provided
         if (email.trim()) {
           billingDetails.email = email.trim();
-          console.log('EMAIL DEBUGGING - Frontend - Added email to billingDetails (address section):', email.trim());
-        } else {
-          console.log('EMAIL DEBUGGING - Frontend - No email provided (address section)');
         }
       }
     }
@@ -617,6 +659,17 @@ function EnhancedStripeCheckoutForm({
                   onChange={(e) => {
                     setEmail(e.target.value);
                     setEmailError(''); // Clear error when typing
+                    
+                    // Update payment intent with email when user enters it
+                    if (e.target.value.trim() && validateEmail(e.target.value)) {
+                      updatePaymentIntentWithEmail(e.target.value.trim());
+                    }
+                  }}
+                  onBlur={(e) => {
+                    // Also try to update when user leaves the field
+                    if (e.target.value.trim() && validateEmail(e.target.value)) {
+                      updatePaymentIntentWithEmail(e.target.value.trim());
+                    }
                   }}
                   placeholder="your.email@example.com"
                   className={`w-full px-4 py-3 border rounded-lg text-sm focus:outline-none focus:ring-2 transition-all duration-200 ${
