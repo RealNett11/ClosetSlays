@@ -191,6 +191,10 @@ function EnhancedStripeCheckoutForm({
       
       // console.log('Sending shipping address to API:', shippingAddress);
       
+      console.log('EMAIL DEBUGGING - Frontend - updatePaymentIntent call #1 - email value:', email);
+      console.log('EMAIL DEBUGGING - Frontend - updatePaymentIntent call #1 - email.trim():', email.trim());
+      console.log('EMAIL DEBUGGING - Frontend - updatePaymentIntent call #1 - email.trim() || undefined:', email.trim() || undefined);
+      
       const data = await updatePaymentIntent(
         paymentIntentId,
         shippingAddress,
@@ -229,6 +233,10 @@ function EnhancedStripeCheckoutForm({
         try {
           // Extract PaymentIntent ID from client secret
           const paymentIntentId = clientSecret.split('_secret_')[0];
+          
+          console.log('EMAIL DEBUGGING - Frontend - updatePaymentIntent call #2 - email value:', email);
+          console.log('EMAIL DEBUGGING - Frontend - updatePaymentIntent call #2 - email.trim():', email.trim());
+          console.log('EMAIL DEBUGGING - Frontend - updatePaymentIntent call #2 - email.trim() || undefined:', email.trim() || undefined);
           
           const data = await updatePaymentIntent(
             paymentIntentId,
@@ -277,6 +285,10 @@ function EnhancedStripeCheckoutForm({
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
+    console.log('EMAIL DEBUGGING - Frontend - handleSubmit called');
+    console.log('EMAIL DEBUGGING - Frontend - email state value:', email);
+    console.log('EMAIL DEBUGGING - Frontend - email after trim:', email.trim());
+
     if (!stripe || !elements) {
       return;
     }
@@ -299,6 +311,8 @@ function EnhancedStripeCheckoutForm({
       return;
     }
 
+    console.log('EMAIL DEBUGGING - Frontend - email validation passed');
+
     setIsLoading(true);
     setError('');
     setPhoneError('');
@@ -315,7 +329,7 @@ function EnhancedStripeCheckoutForm({
     const addressElement = elements.getElement('address');
     let billingDetails: {
       name?: string;
-      email: string;
+      email?: string;
       phone: string;
       address?: {
         line1: string;
@@ -326,16 +340,24 @@ function EnhancedStripeCheckoutForm({
         country: string;
       };
     } = {
-      email: 'customer@example.com', // Default email since we're not collecting it
       phone: phoneNumber || '+1234567890', // Always provide phone, use entered one or default
     };
+    
+    // Add email to billing details if provided
+    if (email.trim()) {
+      billingDetails.email = email.trim();
+      console.log('EMAIL DEBUGGING - Frontend - Added email to billingDetails:', email.trim());
+    } else {
+      console.log('EMAIL DEBUGGING - Frontend - No email provided, not adding to billingDetails');
+    }
+    
+    console.log('EMAIL DEBUGGING - Frontend - Final billingDetails:', billingDetails);
     
     if (addressElement && showAddressForm) {
       const addressValue = await addressElement.getValue();
       if (addressValue.complete && addressValue.value) {
         billingDetails = {
           name: addressValue.value.name || 'Customer',
-          email: 'customer@example.com', // Default email since we're not collecting it
           phone: phoneNumber || '+1234567890', // Always provide phone, use entered one or default
           address: {
             line1: addressValue.value.address?.line1 || '',
@@ -346,6 +368,14 @@ function EnhancedStripeCheckoutForm({
             country: addressValue.value.address?.country || 'US',
           }
         };
+        
+        // Add email to billing details if provided
+        if (email.trim()) {
+          billingDetails.email = email.trim();
+          console.log('EMAIL DEBUGGING - Frontend - Added email to billingDetails (address section):', email.trim());
+        } else {
+          console.log('EMAIL DEBUGGING - Frontend - No email provided (address section)');
+        }
       }
     }
 
