@@ -565,8 +565,8 @@ function EnhancedStripeCheckoutForm({
         {addressComplete && (
           <div className="space-y-4">
             <div className="flex items-center space-x-2 mb-4">
-              <div className="w-8 h-8 rounded-full flex items-center justify-center text-white text-sm font-bold bg-gray-400">
-                📧
+              <div className="w-8 h-8 rounded-full flex items-center justify-center text-white text-sm font-bold bg-black">
+                2
               </div>
               <h3 className="text-lg font-semibold text-gray-900">Email Confirmation (Optional)</h3>
             </div>
@@ -577,8 +577,8 @@ function EnhancedStripeCheckoutForm({
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                   </svg>
                   <div className="flex-1">
-                    <p className="text-sm text-blue-800 font-medium">Get order updates via email</p>
-                    <p className="text-xs text-blue-700 mt-1">We'll send you order confirmation and shipping updates. We don't sell your information or add you to mailing lists.</p>
+                    <p className="text-sm text-blue-800 font-medium">Get order confirmation</p>
+                    <p className="text-xs text-blue-700 mt-1">We don't sell your information or add you to mailing lists.</p>
                   </div>
                 </div>
                 <input
@@ -618,7 +618,7 @@ function EnhancedStripeCheckoutForm({
                   : 'text-gray-400 border-2 border-gray-300'
               }`}
             >
-              2
+              3
             </div>
             <h3 className={`text-lg font-semibold ${addressComplete ? 'text-gray-900' : 'text-gray-400'}`}>
               Payment Details
